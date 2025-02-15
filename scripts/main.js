@@ -1,3 +1,6 @@
+// Store the original order of navigation items
+let originalNavOrder = [];
+
 // Language Switching
 document.getElementById('lang-en').addEventListener('click', function (event) {
     event.preventDefault();
@@ -9,13 +12,21 @@ document.getElementById('lang-he').addEventListener('click', function (event) {
     setLanguage('he');
 });
 
+// Initialize the page in Hebrew by default
+window.addEventListener('DOMContentLoaded', function () {
+    // Store the initial order of nav items
+    var navList = document.getElementById('nav-list');
+    originalNavOrder = Array.from(navList.children); // Save original order
+    setLanguage('he');
+});
+
 function setLanguage(lang) {
     var elements = document.querySelectorAll('.lang');
     elements.forEach(function (el) {
         if (el.classList.contains('lang-' + lang)) {
-            el.style.display = '';  // Show the selected language
+            el.style.display = ''; // Show the selected language
         } else {
-            el.style.display = 'none';  // Hide other languages
+            el.style.display = 'none'; // Hide other languages
         }
     });
 
@@ -29,20 +40,21 @@ function setLanguage(lang) {
 
 function reorderNav(direction) {
     var navList = document.getElementById('nav-list');
-    var items = Array.from(navList.children);
 
-    // Reorder items for RTL (Hebrew) or LTR (English)
-    if (direction === 'rtl') {
-        items.reverse();  // Reverse the order of the items for RTL
-    } else {
-        items.sort();  // Keep the original order for LTR
-    }
-
-    // Clear the existing list and append the reordered items
+    // Clear the existing list and reorder based on the selected language
     navList.innerHTML = '';
-    items.forEach(function (item) {
-        navList.appendChild(item);
-    });
+
+    if (direction === 'rtl') {
+        // Reverse the original order for RTL (Hebrew)
+        originalNavOrder.slice().reverse().forEach(function (item) {
+            navList.appendChild(item);
+        });
+    } else {
+        // Restore the original order for LTR (English)
+        originalNavOrder.forEach(function (item) {
+            navList.appendChild(item);
+        });
+    }
 }
 
 // Hamburger Menu Toggle
@@ -50,3 +62,5 @@ function toggleMenu() {
     var navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active');
 }
+
+

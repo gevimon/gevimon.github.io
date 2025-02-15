@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    font-family: 'Alef', Arial, sans-serif;
+    scroll-behavior: smooth;
+    
+}
+
+.image-container {
+    position: absolute;
+    z-index: -1;
+    top: 60px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-size: cover;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
