@@ -16,7 +16,8 @@ window.onload = function() {
     // Append images dynamically
     imagePaths.forEach(path => {
         const img = document.createElement('img');
-        img.src = `images/${path}`;
+        const cacheBuster = new Date().getTime(); // Generate a cache-busting timestamp
+        img.src = `images/${path}?${cacheBuster}`;
         img.alt = path.split('-').join(' ').replace('.jpg', '') + ' Background';
         imageContainer.appendChild(img);
     });
