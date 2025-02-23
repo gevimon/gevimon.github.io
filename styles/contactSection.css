@@ -1,0 +1,50 @@
+/* Contact Section for Contact Us Page */
+
+#contact {
+    width: 100%;
+    padding: 80px 20px;
+    max-width: 2000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#contact h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#contact p {
+    /*font-size: 1.1em; Wider width for paragraph */
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 55%; /* Wider width for paragraph */
+    margin: 0 auto 20px auto;
+}
+
+#contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 30vw;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Ensure full border visibility */
+}
+
+#contact-form textarea {
+    resize: none;
+}
+
+
