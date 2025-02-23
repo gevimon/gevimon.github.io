@@ -8,7 +8,7 @@
 }
 
 #landing-page {
-    top: 19vw; /* Keep the existing top value */
+    top: 18vw; /* Keep the existing top value */
     width: 40%; /* Example width, adjust as needed */
     max-width: 1200px; /* Optional: maximum width */
     margin: 0 auto; /* Centers the section horizontally */
@@ -27,24 +27,24 @@
 
 
 #services {
-    top: 90vw; /* Adjust as needed */
+    top: 106vw; /* Adjust as needed */
     width: 80%;
     
 }
 
 #future-roadmap {
-    top: 240vw; /* Adjust as needed */
+    top: 255vw; /* Adjust as needed */
     width: 50%;
 }
     
 
 #custom-plugin {
-    top: 265vw; /* Adjust as needed */
+    top: 280vw; /* Adjust as needed */
     width: 50%;
 }
     
 #contact {
-top: 295vw; /* Adjust as needed */
-width: 80%;
+top: 310vw; /* Adjust as needed */
+width: 35%;
 }
     
