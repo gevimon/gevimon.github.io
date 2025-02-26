@@ -1,0 +1,61 @@
+/* Styles for smaller mobile screens */
+
+@media (max-width: 768px) {
+    .text-overlay {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: black;
+        font-size: 4vw;
+        text-align: center;
+    }
+
+    :root {
+        --landing-top: 50vw;
+        --metaphor-top: 180vw;
+        --about-us-top: 230vw;
+        --services-top: 380vw;
+        --future-roadmap-top: 650vw;
+        --custom-plugin-top: 740vw;
+        --contact-top: 800vw;
+    }
+    
+    #landing-page {
+        top: var(--landing-top);
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    
+    #metaphor-section {
+        top: var(--metaphor-top);
+        width: 70%;
+    }
+    
+    #about-us {
+        top: var(--about-us-top);
+        width: 100%;
+    }
+    
+    #services {
+        top: var(--services-top);
+        width: 100%;
+    }
+    
+    #future-roadmap {
+        top: var(--future-roadmap-top);
+        width: 85%;
+    }
+    
+    #custom-plugin {
+        top: var(--custom-plugin-top);
+        width: 85%;
+    }
+    
+    #contact {
+        top: var(--contact-top);
+        width: 80%;
+    }
+    
+}
