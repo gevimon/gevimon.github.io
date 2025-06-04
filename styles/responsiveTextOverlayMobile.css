@@ -11,18 +11,18 @@
     }
 
     :root {
-        --landing-top: 50vw;
+        --landing-top: 60vw;
         --metaphor-top: 180vw;
         --about-us-top: 230vw;
         --services-top: 380vw;
         --future-roadmap-top: 650vw;
         --custom-plugin-top: 740vw;
-        --contact-top: 800vw;
+        --contact-top: 830vw;
     }
     
     #landing-page {
         top: var(--landing-top);
-        width: 90%;
+        width: 100%;
         max-width: 300px;
         margin: 0 auto;
         padding: 15px;
