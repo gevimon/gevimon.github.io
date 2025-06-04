@@ -60,6 +60,7 @@
     cursor: pointer;
     position: relative;
     z-index: 1000;
+    left: -40px; /* Adjust this value to move it further right or left */
 }
 
     .hamburger span {
