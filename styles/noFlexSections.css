@@ -30,7 +30,7 @@
 }
 
 #landing-page .hero h2 {
-    background-color: rgba(255, 255, 255, 0.8); /* Default white with transparency */
+    /*background-color: rgba(255, 255, 255, 0.8);  Default white with transparency */
     width: 60%; /* Adjust width as needed */
     border-radius: 10px; /* Round the corners, adjust value for more/less rounding */
     text-align: center;
