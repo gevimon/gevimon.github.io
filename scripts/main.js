@@ -12,12 +12,11 @@ document.getElementById('lang-he').addEventListener('click', function (event) {
     setLanguage('he');
 });
 
-// Initialize the page in Hebrew by default
+
 window.addEventListener('DOMContentLoaded', function () {
-    // Store the initial order of nav items
     var navList = document.getElementById('nav-list');
-    originalNavOrder = Array.from(navList.children); // Save original order
-    setLanguage('he');
+    originalNavOrder = Array.from(navList.children);
+    setLanguage(window.defaultLang || 'he');
 });
 
 function setLanguage(lang) {

@@ -7,16 +7,6 @@ window.addEventListener("load", function () {
         return;
     }
 
-    const imagePaths = [
-        "landing-background.jpg",
-        "about-background.jpg",
-        "services-background.jpg",
-        "plugin-background.jpg",
-        "future-roadmap-background.jpg",
-        "custom-plugin-background.jpg",
-        "contact-background.jpg"
-    ];
-
     const sections = [
         "landing-page",
         "metaphor-section",
@@ -27,11 +17,30 @@ window.addEventListener("load", function () {
         "contact"
     ];
 
+    
+    const desktopImagePaths = [
+        "landing-background.jpg",
+        "about-background.jpg",
+        "services-background.jpg",
+        "plugin-background.jpg",
+        "future-roadmap-background.jpg",
+        "custom-plugin-background.jpg",
+        "contact-background.jpg"
+    ];
+
+    const mobileImagePaths = [
+        "1.png",
+        "2.png",
+        "3.png",       
+    ];
+
     function updateImages() {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         imageContainer.innerHTML = ""; // Clear existing images
 
-        imagePaths.forEach((path) => {
+        const paths = isMobile ? mobileImagePaths : desktopImagePaths;
+
+        paths.forEach((path) => {
             const img = document.createElement("img");
             const cacheBuster = new Date().getTime();
 
@@ -44,25 +53,34 @@ window.addEventListener("load", function () {
         });
     }
 
+  
     function loadSections() {
-        sections.forEach((section) => {
-            fetch(`sections/${section}.html`)
-                .then((response) => {
-                    if (!response.ok) throw new Error(`Failed to load ${section}.html`);
-                    return response.text();
-                })
-                .then((data) => {
-                    const wrapper = document.createElement("div");
-                    wrapper.innerHTML = data.trim(); // Trim to avoid unintended empty nodes
+    let loadedCount = 0;
+    sections.forEach((section) => {
+        fetch(`sections/${section}.html`)
+            .then((response) => {
+                if (!response.ok) throw new Error(`Failed to load ${section}.html`);
+                return response.text();
+            })
+            .then((data) => {
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = data.trim();
 
-                    const firstChild = wrapper.firstElementChild;
-                    if (firstChild) {
-                        contentContainer.appendChild(firstChild);
+                const firstChild = wrapper.firstElementChild;
+                if (firstChild) {
+                    contentContainer.appendChild(firstChild);
+                }
+                loadedCount++;
+                // When all sections are loaded, set the language
+                if (loadedCount === sections.length) {
+                    if (typeof setLanguage === "function") {
+                        setLanguage(window.defaultLang || 'en');
                     }
-                })
-                .catch((error) => console.error(error));
-        });
-    }
+                }
+            })
+            .catch((error) => console.error(error));
+    });
+}
 
     updateImages();
     loadSections();
