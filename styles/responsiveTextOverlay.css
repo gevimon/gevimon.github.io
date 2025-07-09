@@ -8,11 +8,11 @@
 }
 
 #landing-page {
-    top: 18vw; /* Keep the existing top value */
-    width: 40%; /* Example width, adjust as needed */
-    max-width: 1200px; /* Optional: maximum width */
-    margin: 0 auto; /* Centers the section horizontally */
-    padding: 20px; /* Optional: padding around content */
+    top: max(21vw, 190px); /* Use the larger of 20vw or 80px */
+    width: 40%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 #metaphor-section {

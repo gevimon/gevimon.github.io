@@ -2,12 +2,11 @@
 
 @media (max-width: 768px) {
     .text-overlay {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         color: black;
         font-size: 4vw;
         text-align: center;
+        width: 100%; /* Changed from 100vw */
+        box-sizing: border-box; /* Added for safety */
     }
 
     :root {
@@ -22,40 +21,39 @@
     
     #landing-page {
         top: var(--landing-top);
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
+        width: 100%; /* Changed from 100vw */
         padding: 15px;
+        box-sizing: border-box; /* Added for safety */
     }
     
     #metaphor-section {
         top: var(--metaphor-top);
-        width: 70%;
+        width: 100%;
     }
     
     #about-us {
         top: var(--about-us-top);
-        width: 100%;
+        width: 100% !important;
     }
     
     #services {
         top: var(--services-top);
-        width: 100%;
+        width: 100% !important;
     }
     
     #future-roadmap {
         top: var(--future-roadmap-top);
-        width: 85%;
+        width: 100%;
     }
     
     #custom-plugin {
         top: var(--custom-plugin-top);
-        width: 85%;
+        width: 100%;
     }
     
     #contact {
         top: var(--contact-top);
-        width: 80%;
+        width: 100% !important;
     }
     
 }

@@ -1,3 +1,11 @@
+
+html, body {
+        width: 100vw;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+    }
+
 body {
     margin: 0;
     font-family: 'Alef', Arial, sans-serif;
@@ -12,6 +20,7 @@ body {
     left: 50%; /* Moves the left edge to the middle */
     transform: translateX(-50%); /* Centers it horizontally */
     width: 100vw; /* Ensures it spans the full viewport width */
+    outline: 1px solid red;
 }
 
 .image-container img {
