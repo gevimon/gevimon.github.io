@@ -1,0 +1,221 @@
+/* styles/style.css */
+
+/* Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+h1, .tagline {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+button {
+    cursor: pointer;
+}
+
+/* Header */
+.header-bar {
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 20px;
+}
+.header-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+.header-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+.tagline {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Main Layout */
+.main-content {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* Project Fields Section */
+.project-fields-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.project-fields-section label {
+    font-weight: 600;
+    color: #1a73e8;
+}
+.project-fields-section input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.project-fields-section input:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 4px rgba(26, 115, 232, 0.3);
+}
+
+/* Button Section */
+.button-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.file-input-group {
+    display: inline-block;
+}
+.button {
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.button:hover {
+    background-color: #155bb5;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.button-file {
+    margin-right: 10px;
+}
+.button-convert {
+    background-color: #34a853;
+}
+.button-convert:hover {
+    background-color: #2a873e;
+}
+.conversion-status {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Uploaded Files Section */
+.uploaded-files-section {
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+}
+.uploaded-files {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.uploaded-files li {
+    background: #fff;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+.uploaded-files li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+.prefix-display {
+    font-weight: bold;
+    color: #1a73e8;
+    margin-right: 10px;
+}
+.file-name {
+    margin-right: auto;
+    font-weight: 500;
+}
+.dropdown-container select {
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-right: 5px;
+}
+.overwrite-checkbox {
+    margin-right: 5px;
+}
+.controls {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping to a new row */
+    gap: 10px; /* Reduce gap for tighter alignment */
+    align-items: center;
+    background: #e0e7ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.controls > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Ensure equal spacing for all dropdowns */
+    min-width: 100px; /* Prevent shrinking too much */
+}
+.controls fieldset {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 10px; /* Add spacing between elements */
+    align-items: center; /* Align items vertically */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0;
+}
+.controls legend {
+    font-weight: bold;
+    color: #1a73e8;
+    margin-right: 15px; /* Add spacing after the legend */
+}
+.controls select, .controls input {
+    width: 120px; /* Adjust width as needed */
+    padding: 6px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.controls label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Footer */
+.footer-bar {
+    background: #1a73e8;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .project-fields-section {
+        grid-template-columns: 1fr;
+    }
+    .button-section {
+        flex-direction: column;
+    }
+    .uploaded-files li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

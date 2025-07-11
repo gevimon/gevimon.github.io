@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STEP to NC File Converter</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<header class="header-bar">
+    <div class="header-content">
+        <h1>STEP to NC File Converter</h1>
+        <p class="tagline"></p>
+    </div>
+</header>
+<main class="main-content">
+    <section class="project-fields-section">
+        <label for="projectNumber">Project Number</label>
+        <input type="text" id="projectNumber" placeholder="Enter project number" />
+        <label for="projectName">Project Name</label>
+        <input type="text" id="projectName" placeholder="Enter project name" />
+    </section>
+    <section class="button-section">
+        <div class="file-input-group">
+            <label for="fileInput" class="button button-file">Choose STEP Files</label>
+            <input type="file" id="fileInput" multiple accept=".step,.stp" style="display: none;" />
+        </div>
+        <button id="convertButton" class="button button-convert">Convert to NC</button>
+        <div id="conversionStatus" class="conversion-status"></div>
+    </section>
+    <section class="uploaded-files-section">
+        <ul id="uploadedFilesList" class="uploaded-files"></ul>
+    </section>
+</main>
+<footer class="footer-bar">
+    <p>&copy; 2025 \- YourCompany</p>
+</footer>
+<script src="scripts/app.js"></script>
+</body>
+</html>
