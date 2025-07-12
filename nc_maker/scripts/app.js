@@ -5,8 +5,25 @@ const uploadedFilesList = document.getElementById('uploadedFilesList');
 const projectNumberInput = document.getElementById('projectNumber');
 const projectNameInput = document.getElementById('projectName');
 const conversionStatus = document.getElementById('conversionStatus');
-const profiles = ['HEA100','HEA120','HEA140','HEA160','HEA180','HEA200','HEA220','HEA240','HEA260','HEA280','HEA300','HEA320','HEA340','HEA360','HEA400','HEA450','HEA500','HEA550','HEA600','HEA650','HEA700','HEA800','HEA900','HEA1000','HEB100','HEB120','HEB140','HEB160','HEB180','HEB200','HEB220','HEB240','HEB260','HEB280','HEB300','HEB320','HEB340','HEB360','HEB400','HEB450','HEB500','HEB550','HEB600','HEB650','HEB700','HEB800','HEB900','HEB1000','UPN30','UPN40','UPN50','UPN60','UPN65','UPN80','UPN100','UPN120','UPN140','UPN160','UPN180','UPN200','UPN220','UPN240','UPN260','UPN280','UPN300']
+// const profiles = ['HEA100','HEA120','HEA140','HEA160','HEA180','HEA200','HEA220','HEA240','HEA260','HEA280','HEA300','HEA320','HEA340','HEA360','HEA400','HEA450','HEA500','HEA550','HEA600','HEA650','HEA700','HEA800','HEA900','HEA1000','HEB100','HEB120','HEB140','HEB160','HEB180','HEB200','HEB220','HEB240','HEB260','HEB280','HEB300','HEB320','HEB340','HEB360','HEB400','HEB450','HEB500','HEB550','HEB600','HEB650','HEB700','HEB800','HEB900','HEB1000','UPN30','UPN40','UPN50','UPN60','UPN65','UPN80','UPN100','UPN120','UPN140','UPN160','UPN180','UPN200','UPN220','UPN240','UPN260','UPN280','UPN300']
+let profiles = [];
+
+async function loadProfilesFromCSV() {
+    try {
+        const response = await fetch('static/profiles.csv');
+        const text = await response.text();
+        profiles = text
+            .split('\n')
+            .map(line => line.trim().split(',')[0])
+            .filter(value => value && value.length > 0);
+    } catch (err) {
+        console.error('Failed to load profiles.csv:', err);
+    }
+}
+// Call this before any code that uses `profiles`
+loadProfilesFromCSV();
 // --- Helper function to populate profile size options ---
+
 function populateProfileSizes(typeDropdown, sizeDropdown) {
     sizeDropdown.innerHTML = ''; // Clear existing options
     sizeDropdown.disabled = true; // Default to disabled
