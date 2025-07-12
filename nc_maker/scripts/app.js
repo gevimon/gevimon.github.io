@@ -113,28 +113,24 @@ uploadButton.addEventListener('click', async () => {
         const startNumberInput = document.getElementById('startNumberInput');
         const overwriteCheckbox = li.querySelector('.overwrite-checkbox');
 
-        // Save current type and size values
         const currentType = profileTypeDropdown.value;
         const currentSize = profileSizeDropdown.value;
 
-        // Repopulate size options and restore saved values
         populateProfileSizes(profileTypeDropdown, profileSizeDropdown);
         profileTypeDropdown.value = currentType;
         profileSizeDropdown.value = currentSize;
 
-        // Ensure sizeDropdown remains disabled if overwrite is not checked
         if (!overwriteCheckbox.checked) {
             profileSizeDropdown.disabled = true;
         }
 
-        // Validate profile type and size
         if (!currentType || !currentSize) {
             console.error(`Profile type or size is empty for file: ${fileName}`);
             alert(`Please select a valid profile type and size for file: ${fileName}`);
-            return; // Skip this file if type or size is invalid
+            return;
         }
 
-        let assemblyNumber = fileIndex + 1; // Default fallback
+        let assemblyNumber = fileIndex + 1;
         if (startNumberInput) {
             const startNumber = parseInt(startNumberInput.value, 10);
             if (!isNaN(startNumber)) {
@@ -147,13 +143,13 @@ uploadButton.addEventListener('click', async () => {
         const metadata = {
             Material: material,
             Project: projectName,
-            Profile: currentSize, // Ensure profile size is valid
-            Assembly: assemblyValue, // Concatenated value
-            FileName: fileName, // Keep the original file name
+            Profile: currentSize,
+            Assembly: assemblyValue,
+            AssemblyCount: 1,
+            FileName: fileName,
             Length: 0
         };
 
-        // Ensure metadata is serialized correctly
         try {
             formData.append(`stpFile_${fileName}`, JSON.stringify(metadata));
             formData.append(fileName, file);
@@ -162,9 +158,10 @@ uploadButton.addEventListener('click', async () => {
             alert(`Failed to prepare metadata for file: ${fileName}`);
         }
     });
+
     try {
-        const functionUrl = 'https://factoryfunctions.azurewebsites.net/api/ProcessStpFileFunction?code=Bf-jCZu3gse08jleLLz2jgI7Lm1yrY1_z0hhZ_5pPMKLAzFueG16VQ==';
         // const functionUrl = 'http://localhost:7103/api/ProcessStpFileFunction';
+        const functionUrl = 'https://factoryfunctions.azurewebsites.net/api/ProcessStpFileFunction?code=Bf-jCZu3gse08jleLLz2jgI7Lm1yrY1_z0hhZ_5pPMKLAzFueG16VQ==';
         const response = await fetch(functionUrl, {
             method: 'POST',
             body: formData
@@ -175,20 +172,48 @@ uploadButton.addEventListener('click', async () => {
             throw new Error(`File conversion failed. Status: ${response.status}. ${errorText}`);
         }
 
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'processed-files.zip';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-
-        conversionStatus.textContent = 'Conversion completed successfully!';
+        // Expect JSON with counts, file lists, and base64 zip
+        const result = await response.json();
+       const messages = [];
+       if (result.successCount > 0) {
+           messages.push(`${result.successCount} file(s) converted successfully.`);
+       }
+       if (result.failCount > 0) {
+           messages.push(`${result.failCount} file(s) failed to convert.`);
+       }
+       if (result.failed && result.failed.length > 0) {
+           messages.push(`Failed files: ${result.failed.join(', ')}.`);
+       }
+       conversionStatus.innerText = messages.length > 0 ? messages.join('\n') : 'No files processed.';
+        if (result.failedDetails && result.failedDetails.length > 0) {
+            try {
+                await sendFailedFilesByEmail(result.failedDetails, files);
+                conversionStatus.innerText += '\nError files have been emailed.';
+            } catch (err) {
+                console.error('Failed to send email:', err);
+                conversionStatus.innerText += '\n Failed to send email with error files.';
+            }
+        }
+        // Download the zip if available
+        if (result.zipFile) {
+            const byteCharacters = atob(result.zipFile);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/zip' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'processed-files.zip';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        }
     } catch (error) {
         console.error('Error:', error);
-        alert(`An error occurred while converting files: ${error.message}`);
         conversionStatus.textContent = 'Conversion failed. Please try again.';
     }
 });
@@ -358,4 +383,40 @@ async function displayUploadedFiles(files) {
             });
         });
     }
+}
+async function sendFailedFilesByEmail(failedDetails, files) {
+    // Create a zip with JSZip
+    const zip = new JSZip();
+
+    // Add failed files
+    failedDetails.forEach(detail => {
+        const file = Array.from(files).find(f => f.name === detail.fileName);
+        if (file) {
+            zip.file(detail.fileName, file);
+        }
+    });
+
+    // Generate the zip as a Blob
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+    // Prepare error messages for the email body
+    const errorText = failedDetails.map(f => `${f.fileName}: ${f.error}`).join('\n');
+
+    // Prepare FormData
+    const formData = new FormData();
+    formData.append('subject', 'Error STEP Files');
+    formData.append('body', `Error file details:\n${errorText}`);
+    formData.append('attachment', zipBlob, 'failed-files.zip');
+
+    // Send to Azure Function
+    const res = await fetch('https://factoryfunctions.azurewebsites.net/api/SendEmailFunction?code=Bf-jCZu3gse08jleLLz2jgI7Lm1yrY1_z0hhZ_5pPMKLAzFueG16VQ==', {
+        method: 'POST',
+        body: formData
+    });
+
+    if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text);
+    }
+    return await res.text();
 }
