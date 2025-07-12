@@ -10,8 +10,7 @@ let profiles = [];
 
 async function loadProfilesFromCSV() {
     try {
-        const response = await fetch('static/profiles.csv');
-        const text = await response.text();
+        const response = await fetch('nc_maker/static/profiles.csv');        const text = await response.text();
         profiles = text
             .split('\n')
             .map(line => line.trim().split(',')[0])
