@@ -9,16 +9,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const nameCompany = document.getElementById('name-company').value.trim();
                 const email       = document.getElementById('email').value.trim();
+                const phone       = document.getElementById('phone').value.trim();
                 const message     = document.getElementById('message').value.trim();
                 const interests   = Array.from(
                     document.querySelectorAll('input[name="interest"]:checked')
                 ).map(cb => cb.value);
 
-                const combinedBody =
-                    `Name/Company: ${nameCompany}\n` +
-                    `Email: ${email}\n` +
-                    `Interested in: ${interests.join(', ')}\n` +
-                    `Message: ${message}`;
+                const messagelines = [
+                    `Name/Company: ${nameCompany}`,
+                    `Email: ${email}`,
+                    `Phone: ${phone}`,
+                    `Interested in: ${interests.join(', ')}`
+                ];
+                if (message) {
+                    messagelines.push(`Message: ${message}`);
+                }
+                const combinedBody = messagelines.join('\n');
 
                 const formData = new FormData();
                 formData.append('subject', `Contact form from ${nameCompany}`);
@@ -34,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (messageDiv) {
                         messageDiv.textContent = text;
                         messageDiv.style.color = 'green';
+                    }
+                    // disable the button to prevent resubmission
+                    const submitButton = document.getElementById('submit-button');
+                    if (submitButton) {
+                        submitButton.disabled = true;
                     }
                 } catch (err) {
                     console.error(err);

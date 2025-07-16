@@ -1,10 +1,12 @@
 const fileInput = document.getElementById('fileInput');
 const uploadButton = document.getElementById('convertButton');
-const downloadSection = document.getElementById('downloadSection');
 const uploadedFilesList = document.getElementById('uploadedFilesList');
 const projectNumberInput = document.getElementById('projectNumber');
 const projectNameInput = document.getElementById('projectName');
 const conversionStatus = document.getElementById('conversionStatus');
+const prefixInputAll   = document.getElementById('prefixInputAll');
+const startNumberInput = document.getElementById('startNumberInput');
+
 // const profiles = ['HEA100','HEA120','HEA140','HEA160','HEA180','HEA200','HEA220','HEA240','HEA260','HEA280','HEA300','HEA320','HEA340','HEA360','HEA400','HEA450','HEA500','HEA550','HEA600','HEA650','HEA700','HEA800','HEA900','HEA1000','HEB100','HEB120','HEB140','HEB160','HEB180','HEB200','HEB220','HEB240','HEB260','HEB280','HEB300','HEB320','HEB340','HEB360','HEB400','HEB450','HEB500','HEB550','HEB600','HEB650','HEB700','HEB800','HEB900','HEB1000','UPN30','UPN40','UPN50','UPN60','UPN65','UPN80','UPN100','UPN120','UPN140','UPN160','UPN180','UPN200','UPN220','UPN240','UPN260','UPN280','UPN300']
 let profiles = [];
 
@@ -66,12 +68,14 @@ uploadButton.addEventListener('click', async () => {
     const projectName = projectNameInput.value.trim();
 
     if (!projectNumber || !projectName) {
-        alert('Please enter both project number and project name.');
+        conversionStatus.textContent = 'Please enter project number and project name.';
+        conversionStatus.style.color = 'red';
         return;
     }
 
     if (files.length === 0) {
-        alert('Please select at least one STEP file to upload.');
+        conversionStatus.textContent = 'Please select at least one STEP file to upload.';
+        conversionStatus.style.color = 'red';
         return;
     }
 
@@ -95,7 +99,8 @@ uploadButton.addEventListener('click', async () => {
     });
 
     if (!isValid) {
-        alert(validationMessages.join('\n'));
+        conversionStatus.textContent = validationMessages.join('\n');
+        conversionStatus.style.color = 'red';
         return;
     }
 
@@ -126,7 +131,8 @@ uploadButton.addEventListener('click', async () => {
 
         if (!currentType || !currentSize) {
             console.error(`Profile type or size is empty for file: ${fileName}`);
-            alert(`Please select a valid profile type and size for file: ${fileName}`);
+            conversionStatus.textContent = `Please select a valid profile type and size for file: ${fileName}`;
+            conversionStatus.style.color = 'red';
             return;
         }
 
@@ -155,7 +161,8 @@ uploadButton.addEventListener('click', async () => {
             formData.append(fileName, file);
         } catch (error) {
             console.error('Error serializing metadata:', error);
-            alert(`Failed to prepare metadata for file: ${fileName}`);
+            conversionStatus.textContent = `Failed to prepare metadata for file: ${fileName}`;
+            conversionStatus.style.color = 'red';
         }
     });
 
@@ -188,10 +195,8 @@ uploadButton.addEventListener('click', async () => {
         if (result.failedDetails && result.failedDetails.length > 0) {
             try {
                 await sendFailedFilesByEmail(result.failedDetails, files);
-                conversionStatus.innerText += '\nError files have been emailed.';
             } catch (err) {
                 console.error('Failed to send email:', err);
-                conversionStatus.innerText += '\n Failed to send email with error files.';
             }
         }
         // Download the zip if available
@@ -206,7 +211,7 @@ uploadButton.addEventListener('click', async () => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'processed-files.zip';
+            a.download = `${projectName}_${projectNumber}.zip`;
             document.body.appendChild(a);
             a.click();
             a.remove();
@@ -215,49 +220,20 @@ uploadButton.addEventListener('click', async () => {
     } catch (error) {
         console.error('Error:', error);
         conversionStatus.textContent = 'Conversion failed. Please try again.';
+        conversionStatus.style.color = 'red';
+
     }
 });
 async function displayUploadedFiles(files) {
-    uploadedFilesList.innerHTML = ''; // Clear the list
+    const controls = document.getElementById('controls');
+    controls.style.display = 'flex';
+    // uploadedFilesList.innerHTML = ''; // Clear the list
 
     if (files.length > 0) {
         // Add "Select for All" controls at the top
-        const controls = document.createElement('li');
-        controls.classList.add('controls');
-        controls.innerHTML = `
-          <li class="controls">
-    <fieldset>
-        <legend>Apply to All Files</legend>
-        <div>
-            <select id="materialSelectAll">
-                <option value="">Material</option>
-                <option value="S235">S235</option>
-                <option value="S275">S275</option>
-                <option value="S355">S355</option>
-            </select>
-        </div>
-        <div>
-            <select id="profileTypeSelectAll">
-                <option value="">Type</option>
-                <option value="H">H</option>
-                <option value="U">U</option>
-            </select>
-        </div>
-        <div>
-            <select id="profileSizeSelectAll" disabled>
-                <option value="">Size</option>
-            </select>
-        </div>
-        <div>
-            <input type="number" id="startNumberInput" value="1" min="1" placeholder="Start No.">
-        </div>
-        <div>
-            <input type="text" id="prefixInputAll" placeholder="Prefix">
-        </div>
-    </fieldset>
-</li>
-            `;
-        uploadedFilesList.appendChild(controls);
+        // const controls = document.createElement('li');
+        // controls.classList.add('controls');
+        // uploadedFilesList.appendChild(controls);
 
         // Add event listeners for "Select for All" controls
         const materialSelectAll = document.getElementById('materialSelectAll');
@@ -360,7 +336,10 @@ async function displayUploadedFiles(files) {
                 }
             };
             reader.readAsText(file);
-
+            // inside displayUploadedFiles, after creating `typeDropdown` and `sizeDropdown`:
+            typeDropdown.addEventListener('change', () => {
+                populateProfileSizes(typeDropdown, sizeDropdown);
+            });
             // Handle overwrite checkbox changes
             overwriteCheckbox.addEventListener('change', () => {
                 const isChecked = overwriteCheckbox.checked;
@@ -385,6 +364,8 @@ async function displayUploadedFiles(files) {
     }
 }
 async function sendFailedFilesByEmail(failedDetails, files) {
+    const projectNumber = projectNumberInput.value.trim();
+    const projectName = projectNameInput.value.trim();
     // Create a zip with JSZip
     const zip = new JSZip();
 
@@ -406,7 +387,7 @@ async function sendFailedFilesByEmail(failedDetails, files) {
     const formData = new FormData();
     formData.append('subject', 'Error STEP Files');
     formData.append('body', `Error file details:\n${errorText}`);
-    formData.append('attachment', zipBlob, 'failed-files.zip');
+    formData.append('attachment', zipBlob, `${projectName}_${projectNumber}_failed.zip`);
 
     // Send to Azure Function
     const res = await fetch('https://factoryfunctions.azurewebsites.net/api/SendEmailFunction?code=Bf-jCZu3gse08jleLLz2jgI7Lm1yrY1_z0hhZ_5pPMKLAzFueG16VQ==', {
@@ -420,3 +401,15 @@ async function sendFailedFilesByEmail(failedDetails, files) {
     }
     return await res.text();
 }
+
+
+// toggle whenever prefix changes
+prefixInputAll.addEventListener('input', () => {
+    if (prefixInputAll.value.trim() === '') {
+        startNumberInput.value = '';
+        startNumberInput.disabled = true;
+    } else {
+        startNumberInput.value = '1';
+        startNumberInput.disabled = false;
+    }
+});

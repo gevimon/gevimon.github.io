@@ -38,3 +38,8 @@
 #contact-form button {
     width: 30vw;
 }
+
+button:disabled {
+    opacity: .5;
+    pointer-events: none;
+}
