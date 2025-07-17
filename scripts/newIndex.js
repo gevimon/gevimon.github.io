@@ -17,7 +17,6 @@ window.addEventListener("load", function () {
         "contact"
     ];
 
-    
     const desktopImagePaths = [
         "landing-background.jpg",
         "about-background.jpg",
@@ -31,8 +30,12 @@ window.addEventListener("load", function () {
     const mobileImagePaths = [
         "1.png",
         "2.png",
-        "3.png",       
+        "3.png",
     ];
+
+    // track last width so we only reload on width‐change
+    let lastWidth = window.innerWidth;
+    let resizeTimeout;
 
     function updateImages() {
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
@@ -42,54 +45,53 @@ window.addEventListener("load", function () {
 
         paths.forEach((path) => {
             const img = document.createElement("img");
-            const cacheBuster = new Date().getTime();
-
+            // removed cache‑buster so images stay cached
             img.src = isMobile
-                ? `images/mobile/${path}?${cacheBuster}`
-                : `images/${path}?${cacheBuster}`;
-
-            img.alt = path.replace(/-/g, " ").replace(".jpg", "") + " Background";
+                ? `images/mobile/${path}`
+                : `images/${path}`;
+            img.alt = path.replace(/-/g, " ").replace(/\.(jpg|png)$/, "") + " Background";
             imageContainer.appendChild(img);
         });
     }
 
-  
     function loadSections() {
-    let loadedCount = 0;
-    sections.forEach((section) => {
-        fetch(`sections/${section}.html`)
-            .then((response) => {
-                if (!response.ok) throw new Error(`Failed to load ${section}.html`);
-                return response.text();
-            })
-            .then((data) => {
-                const wrapper = document.createElement("div");
-                wrapper.innerHTML = data.trim();
+        let loadedCount = 0;
+        sections.forEach((section) => {
+            fetch(`sections/${section}.html`)
+                .then((response) => {
+                    if (!response.ok) throw new Error(`Failed to load ${section}.html`);
+                    return response.text();
+                })
+                .then((data) => {
+                    const wrapper = document.createElement("div");
+                    wrapper.innerHTML = data.trim();
 
-                const firstChild = wrapper.firstElementChild;
-                if (firstChild) {
-                    contentContainer.appendChild(firstChild);
-                }
-                loadedCount++;
-                // When all sections are loaded, set the language
-                if (loadedCount === sections.length) {
-                    if (typeof setLanguage === "function") {
-                        setLanguage(window.defaultLang || 'en');
+                    const firstChild = wrapper.firstElementChild;
+                    if (firstChild) {
+                        contentContainer.appendChild(firstChild);
                     }
-                }
-            })
-            .catch((error) => console.error(error));
-    });
-}
+                    loadedCount++;
+                    // When all sections are loaded, set the language
+                    if (loadedCount === sections.length) {
+                        if (typeof setLanguage === "function") {
+                            setLanguage(window.defaultLang || 'en');
+                        }
+                    }
+                })
+                .catch((error) => console.error(error));
+        });
+    }
 
     updateImages();
     loadSections();
 
-    let resizeTimeout;
-
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(updateImages, 200); // Adjust the delay as needed
+        resizeTimeout = setTimeout(() => {
+            if (window.innerWidth !== lastWidth) {
+                lastWidth = window.innerWidth;
+                updateImages();
+            }
+        }, 200); // Adjust the delay as needed
     });
-    
 });
