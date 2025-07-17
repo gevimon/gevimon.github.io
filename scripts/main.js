@@ -75,11 +75,34 @@ document.addEventListener('click', (e) => {
     }
 });
 // Existing code remains unchanged...
+// Add lazy-loading for initial images and for dynamically added images
+document.addEventListener('DOMContentLoaded', function () {
+    // Set lazy-loading for images present on page load
+    const addLazyAttribute = function () {
+        document.querySelectorAll('img:not([loading])').forEach(function (img) {
+            img.setAttribute('loading', 'lazy');
+        });
+    };
 
-// Add lazy-loading attribute to all images on page load
-document.addEventListener('DOMContentLoaded', function() {
-    var images = document.querySelectorAll('img');
-    images.forEach(function(image) {
-        image.setAttribute('loading', 'lazy');
+    addLazyAttribute();
+
+    // Use a MutationObserver to watch for new images added to the DOM
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            mutation.addedNodes.forEach(function (node) {
+                // If the added node is an image, apply lazy-loading
+                if (node.tagName === 'IMG') {
+                    node.setAttribute('loading', 'lazy');
+                }
+                // If the node contains images, process them too
+                else if (node.querySelectorAll) {
+                    node.querySelectorAll('img:not([loading])').forEach(function (img) {
+                        img.setAttribute('loading', 'lazy');
+                    });
+                }
+            });
+        });
     });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 });
