@@ -286,8 +286,8 @@ async function displayUploadedFiles(files) {
             listItem.innerHTML = `
                 <span class="prefix-display">${initialPrefix}</span>
                 <span class="file-name">${file.name}</span>
-                <label>
-                    <input type="checkbox" class="overwrite-checkbox">
+                <label class="overwrite-checkbox">
+                    <input type="checkbox" >
                     Overwrite
                 </label>
                 <div class="dropdown-container">

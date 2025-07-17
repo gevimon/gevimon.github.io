@@ -1,5 +1,21 @@
 /* styles/style.css */
-
+.prefix-display {
+    font-weight: bold;
+    color: #1a73e8;
+    margin-right: 10px;
+}
+.file-name {
+    margin-right: auto;
+    font-weight: 500;
+}
+.dropdown-container select {
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-right: 5px;
+}
+.overwrite-checkbox {
+    margin-right: 5px;
+}
 /* Reset and Typography */
 * {
     margin: 0;
@@ -194,6 +210,33 @@ button {
     .controls > div:nth-of-type(5) {
         flex: 0 0 calc(50% - 5px);
     }
+}li {
+     display: flex;
+     align-items: center;
+     padding: 0.5em;
+ }
+
+/* gap between prefix + filename */
+.prefix-display,
+.file-name {
+    margin-right: 1rem;
+}
+
+/* push the overwrite label to the right */
+label.overwrite-checkbox {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+/* keep your select dropdowns in a row */
+.dropdown-container {
+    display: flex;
+    align-items: center;
+}
+
+/* small gap between selects */
+.dropdown-container select {
+    margin-left: 0.5rem;
 }
 
 /* Wide screens: all in one row, share space, start-number half */
@@ -204,5 +247,26 @@ button {
     }
     .controls > div:nth-of-type(5) {
         flex: 0.5;
+    }
+}
+@media (max-width: 767px) {
+    /* Make overwrite label full‑width and reset its auto margin */
+    label.overwrite-checkbox {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    /* Make each select full‑width and stack vertically */
+    .dropdown-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .dropdown-container select {
+        width: 100%;
+        margin: 0.5rem 0 0;
     }
 }

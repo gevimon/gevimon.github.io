@@ -1,5 +1,6 @@
 // Store the original order of navigation items
 let originalNavOrder = [];
+const navList = document.getElementById('nav-list');
 
 // Language Switching
 document.getElementById('lang-en').addEventListener('click', function (event) {
@@ -58,8 +59,27 @@ function reorderNav(direction) {
 
 // Hamburger Menu Toggle
 function toggleMenu() {
-    var navLinks = document.querySelector('.nav-links');
-    navLinks.classList.toggle('active');
+    navList.classList.toggle('active');
+}
+function closeMenu() {
+    navList.classList.remove('active');
 }
 
+// Close the menu when clicking outside of it on mobile
+document.addEventListener('click', (e) => {
+    const hamburger = document.querySelector('.hamburger');
+    if (navList.classList.contains('active')) {
+        if (!navList.contains(e.target) && !hamburger.contains(e.target)) {
+            closeMenu();
+        }
+    }
+});
+// Existing code remains unchanged...
 
+// Add lazy-loading attribute to all images on page load
+document.addEventListener('DOMContentLoaded', function() {
+    var images = document.querySelectorAll('img');
+    images.forEach(function(image) {
+        image.setAttribute('loading', 'lazy');
+    });
+});
