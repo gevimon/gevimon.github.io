@@ -1,0 +1,287 @@
+/* styles/style.css */
+.prefix-display {
+    font-weight: bold;
+    color: #1a73e8;
+    margin-right: 10px;
+}
+.file-name {
+    margin-right: auto;
+    font-weight: 500;
+}
+.dropdown-container select {
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-right: 5px;
+}
+.overwrite-checkbox {
+    margin-right: 5px;
+}
+/* Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+h1, .tagline {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+}
+button {
+    cursor: pointer;
+}
+
+/* Header */
+.header-bar {
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 20px;
+}
+.header-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+.header-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+.tagline {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Main Layout */
+.main-content {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* Project Fields Section */
+.project-fields-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.project-fields-section label {
+    font-weight: 600;
+    color: #1a73e8;
+}
+.project-fields-section input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.project-fields-section input:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 4px rgba(26, 115, 232, 0.3);
+}
+
+/* Button Section */
+.button-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.file-input-group {
+    display: inline-block;
+}
+.button {
+    background-color: #1a73e8;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.button:hover {
+    background-color: #155bb5;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.button-file {
+    margin-right: 10px;
+}
+.button-convert {
+    background-color: #34a853;
+}
+.button-convert:hover {
+    background-color: #2a873e;
+}
+.conversion-status {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Uploaded Files Section */
+.uploaded-files-section {
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+}
+.uploaded-files {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.uploaded-files li {
+    background: #fff;
+    padding: 15px;
+    margin: 8px 0;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+.uploaded-files li:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Controls Base */
+.controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+    background: #e0e7ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.controls > div {
+    display: flex;
+    flex-direction: column;
+}
+.controls legend {
+    font-weight: bold;
+    color: #1a73e8;
+    margin-right: 15px;
+}
+.controls label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.controls select,
+.controls input {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Responsive */
+/* Small screens: 1×, then 2×, then 2× */
+@media (max-width: 768px) {
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    /* reset every cell to 100% width */
+    .controls > div {
+        flex: 0 0 100%;
+    }
+
+    /* Type & Size share the row */
+    .controls > div:nth-of-type(2),
+    .controls > div:nth-of-type(3) {
+        flex: 0 0 calc(50% - 5px);
+    }
+
+    /* Prefix & Start share the row */
+    .controls > div:nth-of-type(4),
+    .controls > div:nth-of-type(5) {
+        flex: 0 0 calc(50% - 5px);
+    }
+}li {
+     display: flex;
+     align-items: center;
+     padding: 0.5em;
+ }
+
+/* gap between prefix + filename */
+.prefix-display,
+.file-name {
+    margin-right: 1rem;
+}
+
+/* push the overwrite label to the right */
+label.overwrite-checkbox {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+/* keep your select dropdowns in a row */
+.dropdown-container {
+    display: flex;
+    align-items: center;
+}
+
+/* small gap between selects */
+.dropdown-container select {
+    margin-left: 0.5rem;
+}
+
+/* Wide screens: all in one row, share space, start-number half */
+@media (min-width: 769px) {
+    .controls > div {
+        flex: 1;
+        min-width: 0;
+    }
+    .controls > div:nth-of-type(5) {
+        flex: 0.5;
+    }
+}
+@media (max-width: 767px) {
+    /* Make overwrite label full‑width and reset its auto margin */
+    label.overwrite-checkbox {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    /* Make each select full‑width and stack vertically */
+    .dropdown-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .dropdown-container select {
+        width: 100%;
+        margin: 0.5rem 0 0;
+    }
+}
+.quantity-input {
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    width: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.quantity-input:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 4px rgba(26, 115, 232, 0.3);
+}
