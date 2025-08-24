@@ -1,0 +1,56 @@
+<!-- index.html --> <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>STEP to NC File Converter</title>
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<header class="header-bar">
+    <div class="header-content"><h1>STEP to NC File Converter</h1>
+        <p class="tagline"></p></div>
+</header>
+<main class="main-content">
+    <section class="project-fields-section">
+        <div class="field"><label for="projectNumber">Project Number</label> <input type="text" id="projectNumber"
+                                                                                    placeholder="Enter project number"/>
+        </div>
+        <div class="field"><label for="projectName">Project Name</label> <input type="text" id="projectName"
+                                                                                placeholder="Enter project name"/></div>
+    </section>
+    <section class="button-section">
+        <div class="file-input-group"><label for="fileInput" class="button button-file">Choose STEP Files</label> <input
+                type="file" id="fileInput" multiple accept=".step,.stp" style="display: none;"/></div>
+        <button id="convertButton" class="button button-convert">Convert to NC</button>
+        <div id="conversionStatus" class="conversion-status" aria-live="polite"></div>
+    </section>
+    <section class="uploaded-files-section">
+        <ul id="uploadedFilesList" class="uploaded-files"> <!-- Apply-to-All row -->
+            <li id="controls" class="controls" style="display: none;">
+                <legend>Apply to All Files</legend>
+                <div class="control-cell material-cell"><select id="materialSelectAll">
+                    <option value="">Material</option>
+                    <option value="S235">S235</option>
+                    <option value="S275">S275</option>
+                    <option value="S355">S355</option>
+                </select></div>
+                <div class="control-cell type-cell"><select id="profileTypeSelectAll">
+                    <option value="">Type</option>
+                    <option value="H">H</option>
+                    <option value="U">U</option>
+                </select></div>
+                <div class="control-cell size-cell"><select id="profileSizeSelectAll" disabled>
+                    <option value="">Size</option>
+                </select></div>
+                <div class="control-cell prefix-cell"><input id="prefixInputAll" placeholder="Prefix"/></div>
+                <div class="control-cell start-cell"><input id="startNumberInput" type="number" min="1"
+                                                            placeholder="Start" disabled/></div>
+            </li> <!-- uploaded file items appended by scripts/app.js --> </ul>
+    </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>
