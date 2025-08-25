@@ -12,7 +12,7 @@ let profiles = [];
 
 async function loadProfilesFromCSV() {
     try {
-        const response = await fetch(new URL('static/profiles.csv', location.href));
+        const response = await fetch(new URL('static/Profiles.csv', location.href));
         const text = await response.text();
         profiles = text
             .split('\n')
