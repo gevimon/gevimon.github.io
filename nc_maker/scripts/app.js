@@ -12,7 +12,7 @@ let profiles = [];
 
 async function loadProfilesFromCSV() {
     try {
-        const response = await fetch('static/profiles.csv');
+        const response = await fetch(new URL('static/profiles.csv', location.href));
         const text = await response.text();
         profiles = text
             .split('\n')
@@ -361,9 +361,11 @@ async function displayUploadedFiles(files) {
             reader.onload = () => {
                 const content = reader.result;
                 const profileMatch = content.match(/\/\* description \*\/\s*\('([^']+)'\)/);
-                const profile = profileMatch[1].replace('-','');
                 if (profileMatch && profiles.includes(profile)) {
-                    const detectedType = profile.startsWith('HEB') || profile.startsWith('HEA') ? 'H' : (profile.startsWith('UPN') ? 'U' : '');
+                    const profile = profileMatch[1].replace('-','');
+
+                    const detectedType = profile.startsWith('H') || profile.startsWith('I') ? 'H' : (profile.startsWith('U') ? 'U' : '');
+                    console.log('Unrecognized profile type in file:', file.name);
 
                     if (detectedType) {
                         typeDropdown.value = detectedType;
@@ -376,6 +378,15 @@ async function displayUploadedFiles(files) {
                         typeDropdown.disabled = true;
                         sizeDropdown.disabled = true;
                     }
+                    else {
+                        overwriteCheckbox.checked = true;
+                        overwriteCheckbox.disabled = true;
+                    }
+
+                }
+                else {
+                    overwriteCheckbox.checked = true;
+                    overwriteCheckbox.disabled = true;
                 }
             };
             reader.readAsText(file);
