@@ -93,7 +93,8 @@ uploadButton.addEventListener('click', async () => {
     const fileListItems = uploadedFilesList.querySelectorAll('li[data-file-index]');
     let isValid = true;
     let validationMessages = [];
-
+var errorMaterial = false;
+var errorProfile = false;
     fileListItems.forEach((li, index) => {
         const fileName = li.dataset.fileName;
         const materialDropdown = li.querySelector('.material-dropdown');
@@ -101,13 +102,21 @@ uploadButton.addEventListener('click', async () => {
 
         if (!materialDropdown || !materialDropdown.value) {
             isValid = false;
-            validationMessages.push(`File ${index + 1} (${fileName}): Please select a Material.`);
+errorMaterial = true;
+            // validationMessages.push(`File ${index + 1} (${fileName}): Please select a Material.`);
         }
-        if (!profileSizeDropdown || (!profileSizeDropdown.disabled && !profileSizeDropdown.value)) {
+        if (!profileSizeDropdown || profileSizeDropdown == "" || (!profileSizeDropdown.value)) {
             isValid = false;
-            validationMessages.push(`File ${index + 1} (${fileName}): Please select a Profile Size.`);
+errorProfile = true;
+            // validationMessages.push(`File ${index + 1} (${fileName}): Please select a Profile Size.`);
         }
     });
+if (errorMaterial) {
+    validationMessages.push(`Please select Material for all files.`);
+}
+if (errorProfile) {
+    validationMessages.push(`Please select Profile Size for all files.`);
+}
 
     if (!isValid) {
         conversionStatus.textContent = validationMessages.join('\n');
