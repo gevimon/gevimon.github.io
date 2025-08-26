@@ -56,7 +56,7 @@ function populateProfileSizes(typeDropdown, sizeDropdown) {
 
 // --- End Helper ---
 
-
+var stpFiles=[];
 // update the existing listener
 fileInput.addEventListener('change', async () => {
     const files = fileInput.files;
@@ -68,13 +68,13 @@ fileInput.addEventListener('change', async () => {
         await LoadProperties(files[0]);
         return;
     }
-
+    stpFiles = files;
     conversionStatus.textContent = 'Loading STEP files...';
     await displayUploadedFiles(files);
     conversionStatus.textContent = '';
 });
 uploadButton.addEventListener('click', async () => {
-    const files = fileInput.files;
+    const files = stpFiles;
     const projectNumber = projectNumberInput.value.trim();
     const projectName = projectNameInput.value.trim();
 
