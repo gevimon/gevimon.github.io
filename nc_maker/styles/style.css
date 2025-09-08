@@ -267,3 +267,21 @@ select {
         align-items: center;
     }
 }
+/* Add this to your stylesheet — only styles the X button */
+#uploadedFilesList .remove-row-button {
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.06);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: #b91c1c;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .12s ease, transform .08s ease, box-shadow .08s ease;
+}
+
