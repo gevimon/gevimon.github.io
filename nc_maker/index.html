@@ -21,8 +21,12 @@
                                                                                 placeholder="Enter project name"/></div>
     </section>
     <section class="button-section">
-        <div class="file-input-group"><label for="fileInput" class="button button-file">Choose STEP Files</label> <input
-                type="file" id="fileInput" multiple accept=".step,.stp" style="display: none;"/></div>
+        <div class="file-input-group">
+            <label for="fileInputButton" class="button button-file">Choose STEP Files</label>
+            <input
+                type="file" id="fileInputButton" multiple accept=".step,.stp" style="display: none;"
+            />
+        </div>
         <button id="convertButton" class="button button-convert">Convert to NC</button>
         <div id="conversionStatus" class="conversion-status" aria-live="polite"></div>
     </section>
@@ -39,6 +43,7 @@
                 <div class="control-cell type-cell"><select id="profileTypeSelectAll">
                     <option value="">Type</option>
                     <option value="H">H</option>
+                    <option value="I">I</option>
                     <option value="U">U</option>
                 </select></div>
                 <div class="control-cell size-cell"><select id="profileSizeSelectAll" disabled>
