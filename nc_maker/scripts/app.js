@@ -606,3 +606,4 @@ profileSizeSelectAll.addEventListener('change', () => {
         dropdown.value = profileSizeSelectAll.value;
     });
 });
+
