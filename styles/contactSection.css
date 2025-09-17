@@ -78,3 +78,8 @@
     }
 
 }
+/* in styles/contactSection.css */
+#contact-form label.required::after {
+  content: " *";
+  color: red;
+}
