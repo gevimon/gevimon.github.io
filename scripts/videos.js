@@ -1,11 +1,13 @@
 // scripts/videos.js
 // Now accepts a title and displays it
-function openModal(videoSrc, videoTitle) {
+function openModal(videoSrc, videoTitle, videoDescription) {
     var modal = document.getElementById("video-modal");
     var video = document.getElementById("modal-video");
     var title = document.getElementById("modal-title");
+    var description = document.getElementById("modal-description");
 
     title.textContent = videoTitle;
+    description.textContent = videoDescription;
     video.src = videoSrc;
     video.load();
     video.play();

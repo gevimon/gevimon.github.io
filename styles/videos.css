@@ -56,3 +56,10 @@
     color: #fff;
     font-size: 18px;
 }
+.modal-description {
+    padding: 12px 16px;
+    background-color: #111;
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.5;
+}

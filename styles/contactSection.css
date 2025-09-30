@@ -73,7 +73,7 @@
 /* Wide screens: 3 checkboxes per row */
 @media (min-width: 768px) {
     .checkbox-group {
-        grid-template-columns: repeat(3, max-content);
+        grid-template-columns: repeat(2, max-content);
         justify-content: center;   /* <-- center the two columns */
     }
 
