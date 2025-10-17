@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+How to use this template:
+1) Save a copy in the same folder as your post file (e.g. posts/2025-10-01-my-topic.html) and edit contents.
+2) Add a new object to BIMBlog/posts.json with title, date (YYYY-MM-DD), excerpt, tags, optional thumbnail and readTime, and the url to the post file.
+3) Commit both the post file and the updated posts.json.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post Title Here</title>
+  <link href="../styles/global.css" rel="stylesheet" />
+  <link href="../styles/navbar.css" rel="stylesheet" />
+  <link href="../styles/blog.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Alef&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    window.defaultLang = 'en';
+  </script>
+</head>
+<body>
+  <!-- When you copy this file into BIMBlog/posts/, the data-root below is correct (../../) -->
+  <!-- If you preview this template directly from BIMBlog/, change to data-root="../" just for preview. -->
+  <site-navbar data-root="../../"></site-navbar>
+
+  <article class="post-page">
+    <header class="post-header">
+      <h1>Post Title Here</h1>
+      <p class="post-sub">Month DD, YYYY • X min read</p>
+    </header>
+
+    <section class="post-content">
+      <p>Intro paragraph...</p>
+      <h2>Section heading</h2>
+      <p>Body content...</p>
+      <pre><code>// Code sample
+console.log('Hello BIMblog');
+</code></pre>
+  <p>Wrap-up and call to action. Link back to <a href="../index.html">BIMblog</a> or <a href="../index.html#contact">contact</a>.</p>
+    </section>
+  </article>
+
+  <footer class="blog-footer">
+    <p>&copy; <span id="year"></span> BIMbee</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script defer src="../../scripts/navbar.js"></script>
+  <script defer src="../../scripts/main.js"></script>
+</body>
+</html>
