@@ -1,3 +1,52 @@
+/* Bee-themed button for landing page */
+#landing-page button[type="button"] {
+    background: linear-gradient(90deg, #FFD600 60%, #FFB300 100%);
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5em 0.8em;
+    font-size: 0.8em;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
+    letter-spacing: 0.03em;
+    margin-top: 1em;
+    outline: none;
+    position: relative; /* for stripe overlay */
+    overflow: hidden;   /* clip overlay to pill shape */
+}
+#landing-page button[type="button"]::before {
+    /* subtle diagonal bee stripes overlay */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.06) 0 10px,
+        rgba(0, 0, 0, 0) 10px 20px
+    );
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    transition: opacity 0.2s, transform 0.2s;
+}
+#landing-page button[type="button"]:hover {
+    background: linear-gradient(90deg, #FFB300 60%, #FFD600 100%);
+    color: #000;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+#landing-page button[type="button"]:hover::before {
+    opacity: 0.8;
+    transform: translateX(4px);
+}
+#landing-page button[type="button"]:active {
+    transform: translateY(0) scale(0.99);
+}
+#landing-page button[type="button"]:focus-visible {
+    outline: 3px solid #000; /* high contrast focus ring */
+    outline-offset: 2px;
+}
 #landing-page .hero h2 {
     /*background-color: rgba(255, 255, 255, 0.8);  Default white with transparency */
     width: 80%; /* Adjust width as needed */
@@ -8,3 +57,11 @@
 }
 
 /* Adjust the transparency by changing the last value in rgba, e.g., rgba(255, 255, 255, 1) for no transparency */
+
+/* Bigger button text on smaller mobile screens for readability */
+@media (max-width: 400px) {
+    #landing-page button[type="button"] {
+        font-size: 1rem; /* was 0.8em */
+        padding: 0.6em 1em; /* keep tap target comfortable */
+    }
+}
