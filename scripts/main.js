@@ -6,18 +6,22 @@ const navList = document.getElementById('nav-list');
 document.getElementById('lang-en').addEventListener('click', function (event) {
     event.preventDefault();
     setLanguage('en');
+    try { localStorage.setItem('bimbee_lang', 'en'); } catch {}
 });
 
 document.getElementById('lang-he').addEventListener('click', function (event) {
     event.preventDefault();
     setLanguage('he');
+    try { localStorage.setItem('bimbee_lang', 'he'); } catch {}
 });
 
 
 window.addEventListener('DOMContentLoaded', function () {
     var navList = document.getElementById('nav-list');
     originalNavOrder = Array.from(navList.children);
-    setLanguage(window.defaultLang || 'he');
+    var saved = null;
+    try { saved = localStorage.getItem('bimbee_lang'); } catch {}
+    setLanguage(saved || window.defaultLang || 'he');
 });
 
 function setLanguage(lang) {
@@ -36,6 +40,13 @@ function setLanguage(lang) {
     } else {
         reorderNav('ltr');
     }
+
+    // Notify the rest of the site (e.g., BIMblog) that the language changed
+    // and expose the current language in a safe, global spot.
+    try {
+        window.currentLang = lang;
+        window.dispatchEvent(new CustomEvent('bimbee:languagechange', { detail: { lang: lang } }));
+    } catch (e) { /* no-op */ }
 }
 
 function reorderNav(direction) {
