@@ -20,7 +20,7 @@ body {
     left: 50%; /* Moves the left edge to the middle */
     transform: translateX(-50%); /* Centers it horizontally */
     width: 100vw; /* Ensures it spans the full viewport width */
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
 }
 
 .image-container img {
