@@ -1,5 +1,89 @@
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile contact modal functionality
+    function initMobileContactModal() {
+        const triggerBtn = document.getElementById('mobile-contact-trigger');
+        const closeBtn = document.getElementById('contact-modal-close');
+        const modalOverlay = document.getElementById('contact-modal-overlay');
+        const modalContent = document.querySelector('.contact-modal-content');
+        const contactForm = document.getElementById('contact-form');
+        const section = document.getElementById('contact');
+
+        if (!triggerBtn || !closeBtn || !modalOverlay || !contactForm) {
+            return false;
+        }
+
+        function openModal() {
+            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+            if (!isMobile) return;
+
+            // Move form into modal
+            modalContent.appendChild(contactForm);
+            
+            // Show modal
+            modalOverlay.classList.add('is-open');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            
+            // Lock body scroll
+            document.body.style.overflow = 'hidden';
+            
+            // Focus first input
+            const firstInput = contactForm.querySelector('input');
+            if (firstInput) {
+                setTimeout(() => firstInput.focus(), 100);
+            }
+        }
+
+        function closeModal() {
+            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+            if (!isMobile) return;
+
+            // Move form back to original location
+            const hero = document.querySelector('#contact .hero');
+            if (hero) {
+                hero.appendChild(contactForm);
+            }
+            
+            // Hide modal
+            modalOverlay.classList.remove('is-open');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            
+            // Unlock body scroll
+            document.body.style.overflow = '';
+            
+            // Return focus to trigger button
+            triggerBtn.focus();
+        }
+
+        // Event listeners
+        triggerBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        
+        // Close on backdrop click
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+            if (!isMobile && modalOverlay.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+
+        return true;
+    }
+
     // dynamically generate interest checkboxes
     const interestOptions = [
         'Option First',
@@ -82,6 +166,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     }
 
+    // Initialize modal first
+    if (!initMobileContactModal()) {
+        const modalObserver = new MutationObserver(() => {
+            if (initMobileContactModal()) modalObserver.disconnect();
+        });
+        modalObserver.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // Initialize form listener
     if (!attachListener()) {
         const observer = new MutationObserver(() => {
             if (attachListener()) observer.disconnect();
