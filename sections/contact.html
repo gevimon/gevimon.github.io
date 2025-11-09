@@ -18,6 +18,13 @@
                 اتصل بنا اليوم!
             </p>
 
+            <!-- Mobile trigger button (shown only on mobile) -->
+            <button type="button" id="mobile-contact-trigger" class="mobile-contact-trigger" aria-haspopup="dialog">
+                <span class="lang lang-en">Contact Us</span>
+                <span class="lang lang-he" dir="rtl" style="display:none;">צור קשר</span>
+                <span class="lang lang-ar" dir="rtl" style="display:none;">اتصل بنا</span>
+            </button>
+
             <form id="contact-form">
                 <label class="lang lang-en required" for="name-company">Name / Company:</label>
                 <label class="lang lang-he required" for="name-company" dir="rtl" style="display:none;">שם / חברה:</label>
@@ -32,18 +39,12 @@
                 <label class="lang lang-en" for="phone">Phone:</label>
                 <label class="lang lang-he" for="phone" dir="rtl" style="display:none;">טֵלֵפוֹן:</label>
                 <label class="lang lang-ar" for="phone" dir="rtl" style="display:none;">الهاتف:</label>
-                <input type="tel" id="phone"   pattern="\+?\d{10,15}">
+                <input type="tel" id="phone" pattern="\+?\d{10,15}">
 
                 <label class="lang lang-en" style="margin-top:1em;">Interested in:</label>
                 <label class="lang lang-he" dir="rtl" style="display:none;margin-top:1em;">מעוניין ב:</label>
                 <label class="lang lang-ar" dir="rtl" style="display:none;margin-top:1em;">مهتم بـ:</label>
-                <div class="checkbox-group">
-<!--                    <label><input type="checkbox" name="interest" value="Option1"> Option First</label>-->
-<!--                    <label><input type="checkbox" name="interest" value="Option2"> Option Second</label>-->
-<!--                    <label><input type="checkbox" name="interest" value="Option3"> Option Third</label>-->
-<!--                    <label><input type="checkbox" name="interest" value="Option4"> Option #4</label>-->
-<!--                    <label><input type="checkbox" name="interest" value="Option5"> Option #5</label>-->
-                </div>
+                <div class="checkbox-group"></div>
 
                 <label class="lang lang-en" for="message">Message:</label>
                 <label class="lang lang-he" for="message" dir="rtl" style="display:none;">הודעה:</label>
@@ -57,6 +58,14 @@
                 </button>
                 <div id="form-message" style="margin-top:1em;"></div>
             </form>
+        </div>
+    </div>
+
+    <!-- Mobile modal -->
+    <div id="contact-modal-overlay" class="contact-modal-overlay" aria-hidden="true">
+        <div class="contact-modal-dialog" role="dialog" aria-modal="true">
+            <button type="button" id="contact-modal-close" class="contact-modal-close" aria-label="Close">×</button>
+            <div class="contact-modal-content"><!-- Form injected here on open --></div>
         </div>
     </div>
 </section>

@@ -1,0 +1,38 @@
+.plugin {
+    position: relative;
+    display: inline-block;
+    font-size: 1.5vw;
+
+}
+
+.plugin h3 {
+    position: absolute;
+    top: 30px;               /* lower the text slightly */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    margin: 0;
+    line-height: 1.1;        /* reduce vertical spacing between lines */
+    text-size: 0.5vw;
+    pointer-events: none;
+}
+
+.plugin img {
+    display: block;
+}
+.plugin-title {
+    text-align: center;
+    font-size: 2.5vw;
+    margin-bottom: -20px;
+}
+/* Mobile-only size tweak for the overlay text; keeps position unchanged */
+@media (max-width: 768px) {
+  .plugin h3 {
+    font-size: clamp(10px, 1vw, 14px); /* smaller than the 3vw title */
+      top: 15px;               /* lower the text slightly */
+  }
+    .plugin-title {
+        font-size: 2.5vw;
+        margin-bottom: -10px;
+    }
+}
