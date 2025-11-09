@@ -83,3 +83,114 @@
   content: " *";
   color: red;
 }
+
+/* Mobile contact trigger button - hidden by default */
+.mobile-contact-trigger {
+    display: none;
+}
+
+/* Contact modal overlay - hidden by default */
+.contact-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.contact-modal-overlay.is-open {
+    display: flex;
+}
+
+.contact-modal-dialog {
+    position: relative;
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    line-height: 1;
+    color: #333;
+    cursor: pointer;
+    padding: 5px 10px;
+    z-index: 1;
+}
+
+.contact-modal-close:hover {
+    color: #000;
+}
+
+/* Mobile styles - max-width: 767.98px */
+@media (max-width: 767.98px) {
+    /* Show mobile trigger button, hide inline form */
+    .mobile-contact-trigger {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 1.1em;
+        background-color: #FFC107;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 20px auto;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .mobile-contact-trigger:hover {
+        background-color: #FFB300;
+    }
+
+    /* Hide the inline form on mobile */
+    #contact-form {
+        display: none;
+    }
+
+    /* When modal is open, move form into modal */
+    .contact-modal-overlay.is-open #contact-form {
+        display: block;
+        max-width: 100%;
+    }
+
+    /* Adjust form inputs for mobile */
+    .contact-modal-overlay.is-open #contact-form input,
+    .contact-modal-overlay.is-open #contact-form textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Desktop/tablet styles - min-width: 768px */
+@media (min-width: 768px) {
+    /* Hide mobile trigger and modal overlay on desktop */
+    .mobile-contact-trigger {
+        display: none;
+    }
+
+    .contact-modal-overlay {
+        display: none !important;
+    }
+
+    /* Show inline form on desktop */
+    #contact-form {
+        display: block;
+    }
+}
