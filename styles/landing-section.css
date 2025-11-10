@@ -61,7 +61,7 @@
 /* Bigger button text on smaller mobile screens for readability */
 @media (max-width: 600px) {
     #landing-page button[type="button"] {
-        font-size: 1rem; /* was 0.8em */
-        padding: 0.6em 1em; /* keep tap target comfortable */
+        font-size: 1.3rem; /* was 0.8em */
+        padding: 0.7em 1.2em; /* keep tap target comfortable */
     }
 }
