@@ -59,7 +59,7 @@
 /* Adjust the transparency by changing the last value in rgba, e.g., rgba(255, 255, 255, 1) for no transparency */
 
 /* Bigger button text on smaller mobile screens for readability */
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     #landing-page button[type="button"] {
         font-size: 1rem; /* was 0.8em */
         padding: 0.6em 1em; /* keep tap target comfortable */
