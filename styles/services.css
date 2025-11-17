@@ -5,6 +5,11 @@
 
 }
 
+.plugin-block {
+    margin-left: 0vw; /* Desktop: move block off center, adjust as needed */
+    max-width: 80vw;
+}
+
 .plugin h3 {
     position: absolute;
     top: 30px;               /* lower the text slightly */
@@ -19,6 +24,23 @@
 
 .plugin img {
     display: block;
+    width: 22vw;   /* Large screen image width control */
+    height: auto;  /* Maintain aspect ratio */
+    max-width: 340px; /* Optional: cap max size for very large screens */
+    border-radius: 12px; /* Optional: add rounded corners */
+}
+/* Individual plugin image sizing for desktop */
+.plugin-img-fabpackager {
+    width: 24vw;
+    max-width: 370px;
+}
+.plugin-img-bimchecker {
+    width: 20vw;
+    max-width: 310px;
+}
+.plugin-img-drawingcreator {
+    width: 28vw;
+    max-width: 400px;
 }
 .plugin-title {
     text-align: center;
@@ -27,12 +49,45 @@
 }
 /* Mobile-only size tweak for the overlay text; keeps position unchanged */
 @media (max-width: 768px) {
-  .plugin h3 {
-    font-size: clamp(10px, 1vw, 14px); /* smaller than the 3vw title */
-      top: 15px;               /* lower the text slightly */
-  }
-    .plugin-title {
-        font-size: 2.5vw;
+    .plugin-block:first-of-type {
+        margin-top: 15vw; /* More space above first block on mobile, adjust as needed */
+    }
+    .plugin-block {
+        margin-left: -5vw; /* Mobile: move block off center, adjust as needed */
+    }
+    .plugin h3 {
+        font-size: 5vw; /* smaller than the 3vw title */
+    }
+    .plugin h3.lang-en {
+        top: 30px; /* English position */
+    }
+    .plugin h3.lang-he {
+        top: 15px; /* Hebrew position, adjust as needed */
+    }
+    .plugin-title.lang-en {
+        font-size: 7.2vw;
         margin-bottom: -10px;
+    }
+      .plugin-title.lang-he {
+        font-size: 9.2vw;
+        margin-bottom: -10px;
+    }
+    .plugin img {
+        width: 60vw;   /* Mobile image width control */
+        max-width: 98vw;
+        border-radius: 8px;
+    }
+    /* Individual plugin image sizing for mobile */
+    .plugin-img-fabpackager {
+        width: 60vw;
+        border-radius: 0px;
+    }
+    .plugin-img-bimchecker {
+        width: 60vw;
+        border-radius: 0px;
+    }
+    .plugin-img-drawingcreator {
+        width: 70vw;
+        border-radius: 0px;
     }
 }

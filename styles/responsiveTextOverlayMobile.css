@@ -13,10 +13,10 @@
         --landing-top: 60vw;
         --metaphor-top: 180vw;
         --about-us-top: 230vw;
-        --services-top: 350vw;
-        --future-roadmap-top: 650vw;
-        --custom-plugin-top: 740vw;
-        --contact-top: 830vw;
+        --services-top: 360vw;
+        --future-roadmap-top: 720vw;
+        --custom-plugin-top: 800vw;
+        --contact-top: 870vw;
     }
     
     #landing-page {
@@ -48,12 +48,12 @@
     
     #custom-plugin {
         top: var(--custom-plugin-top);
-        width: 100%;
+        width: 90%;
     }
     
     #contact {
         top: var(--contact-top);
-        width: 100% !important;
+        width: 75% !important;
     }
     
 }
