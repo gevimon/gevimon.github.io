@@ -11,12 +11,12 @@
 
     :root {
         --landing-top: 60vw;
-        --metaphor-top: 180vw;
-        --about-us-top: 230vw;
-        --services-top: 360vw;
-        --future-roadmap-top: 720vw;
-        --custom-plugin-top: 800vw;
-        --contact-top: 870vw;
+        --metaphor-top: 190vw;
+        --about-us-top: 240vw;
+        --services-top: 370vw;
+        --future-roadmap-top: 760vw;
+        --custom-plugin-top: 860vw;
+        --contact-top: 930vw;
     }
     
     #landing-page {
