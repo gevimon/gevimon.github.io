@@ -1,93 +1,102 @@
-.plugin {
-    position: relative;
-    display: inline-block;
-    font-size: 1.5vw;
-
+.plugin-block:first-of-type {
+    margin-top: 5vw; /* More space above first block on mobile, adjust as needed */
 }
-
 .plugin-block {
-    margin-left: 0vw; /* Desktop: move block off center, adjust as needed */
-    max-width: 80vw;
+    position: relative;
+    margin-left: -40vw; /* Mobile: move block off center, adjust as needed */
 }
-
+.plugin-title,
 .plugin h3 {
     position: absolute;
-    top: 30px;               /* lower the text slightly */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2;
-    margin: 0;
-    line-height: 1.1;        /* reduce vertical spacing between lines */
-    text-size: 0.5vw;
-    pointer-events: none;
+    z-index: 2;   
 }
 
-.plugin img {
-    display: block;
-    width: 22vw;   /* Large screen image width control */
-    height: auto;  /* Maintain aspect ratio */
-    max-width: 340px; /* Optional: cap max size for very large screens */
-    border-radius: 12px; /* Optional: add rounded corners */
-}
-/* Individual plugin image sizing for desktop */
-.plugin-img-fabpackager {
-    width: 24vw;
-    max-width: 370px;
-}
-.plugin-img-bimchecker {
-    width: 20vw;
-    max-width: 310px;
-}
-.plugin-img-drawingcreator {
-    width: 28vw;
-    max-width: 400px;
-}
+.plugin-title.fabpackager.lang-en { top: -2vw;  }
+h3.fabpackager.lang-en { top: 5vw;  }
+
+.plugin-title.fabpackager.lang-he { top: -3vw;  }
+h3.fabpackager.lang-he { top: 4vw;  }
+
+.plugin-title.bimchecker.lang-en { top: -1vw; }
+h3.bimchecker.lang-en { top: 7vw;  }
+
+.plugin-title.bimchecker.lang-he { top: 1vw;  }
+h3.bimchecker.lang-he { top: 5vw;  }
+
+.plugin-title.drawingcreator.lang-en { top: -3vw;  }
+h3.drawingcreator.lang-en { top: 4vw;  }
+
+.plugin-title.drawingcreator.lang-he { top: -1vw;  }
+h3.drawingcreator.lang-he { top: 4vw;  }
+
+
 .plugin-title {
-    text-align: center;
-    font-size: 2.5vw;
-    margin-bottom: -20px;
+    top: -4vw; /* Move title down or up, adjust value as needed */
+    line-height: 0.9;
+    font-size: 3.2vw;
 }
+.plugin h3 {
+    top: 2.5vw; /* Move h3 down or up, adjust value as needed */
+    line-height: 1.3;
+    font-size: 2vw; /* smaller than the 3vw title */
+    
+}
+.plugin img {
+    width: 38vw;   /* Mobile image width control */
+   
+}
+
+
 /* Mobile-only size tweak for the overlay text; keeps position unchanged */
 @media (max-width: 768px) {
     .plugin-block:first-of-type {
         margin-top: 15vw; /* More space above first block on mobile, adjust as needed */
     }
     .plugin-block {
-        margin-left: -5vw; /* Mobile: move block off center, adjust as needed */
+        margin-left: -22vw; /* Mobile: move block off center, adjust as needed */
     }
     .plugin h3 {
-        font-size: 5vw; /* smaller than the 3vw title */
+        font-size: 4vw; /* smaller than the 3vw title */
+    }
+    .plugin-title {
+        font-size: 6.4vw;
     }
     .plugin h3.lang-en {
-        top: 30px; /* English position */
+        top: 5vw; /* English position */
     }
     .plugin h3.lang-he {
-        top: 15px; /* Hebrew position, adjust as needed */
+        top: 5vw; /* Hebrew position, adjust as needed */
     }
     .plugin-title.lang-en {
-        font-size: 7.2vw;
-        margin-bottom: -10px;
+        top: -10vw;
     }
       .plugin-title.lang-he {
-        font-size: 9.2vw;
-        margin-bottom: -10px;
+        top: -10vw;
     }
     .plugin img {
-        width: 60vw;   /* Mobile image width control */
-        max-width: 98vw;
-        border-radius: 8px;
+        width: 70vw;   /* Mobile image width control */
     }
-    /* Individual plugin image sizing for mobile */
-    .plugin-img-fabpackager {
-        width: 60vw;
-        border-radius: 0px;
-    }
-    .plugin-img-bimchecker {
-        width: 60vw;
-        border-radius: 0px;
-    }
-    .plugin-img-drawingcreator {
-        width: 70vw;
-        border-radius: 0px;
-    }
+
+    .plugin-title.fabpackager.lang-en { top: -8vw;  }
+    h3.fabpackager.lang-en { top: 7vw;  }
+
+    .plugin-title.fabpackager.lang-he { top: -8vw;  }
+    h3.fabpackager.lang-he { top: 5vw;  }
+
+    .plugin-title.bimchecker.lang-en { top: -5vw; }
+    h3.bimchecker.lang-en { top: 10vw;  }
+
+    .plugin-title.bimchecker.lang-he { top: -1vw;  }
+    h3.bimchecker.lang-he { top: 7vw;  }
+
+    .plugin-title.drawingcreator.lang-en { top: -7vw;  }
+    h3.drawingcreator.lang-en { top: 8vw;  }
+
+    .plugin-title.drawingcreator.lang-he { top: -5vw;  }
+    h3.drawingcreator.lang-he { top: 3vw;  }
+
+
+   
 }

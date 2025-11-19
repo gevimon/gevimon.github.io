@@ -14,8 +14,8 @@
 
 .modal-content {
     position: relative;
-    width: 90%; /* Increased from 80% */
-    max-width: 900px; /* Increased from 640px */
+    width: 98%; /* Increased from 90% */
+    max-width: 1400px; /* Increased from 900px */
     background-color: #000;
     padding: 0;
     border-radius: 8px;
@@ -25,7 +25,10 @@
 
     .modal-content video {
         width: 100%;
-        height: auto;
+        height: 60vw; /* Make video taller */
+        max-height: 70vh;
+        display: block;
+        margin: 10 auto;
     }
 
 /*.close-button {*/
@@ -39,27 +42,35 @@
 /*}*/
 .close-button {
     color: #fff;
-    font-size: 24px;
+    font-size: 45px; /* Increased from 24px */
     font-weight: bold;
     cursor: pointer;
+    line-height: 1;
 }
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0 2vw;
     background-color: #111;
 }
 
 .modal-header h4 {
-    margin: 0;
+    margin: 10px;
     color: #fff;
     font-size: 18px;
 }
 .modal-description {
-    padding: 12px 16px;
+    padding: 1.5vw 2vw;
     background-color: #111;
     color: #fff;
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 22px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+/* Yellow links in modal description */
+.modal-description a {
+    color: #FFD600;
+    text-decoration: underline;
 }
