@@ -19,13 +19,14 @@ window.addEventListener("load", function () {
 
 
     const desktopImagePaths = [
-        "landing-background.jpg",
-        "about-background.jpg",
-        "services-background.jpg",
-        "plugin-background.jpg",
-        "future-roadmap-background.jpg",
-        "custom-plugin-background.jpg",
-        "contact-background.jpg"
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg"
     ];
 
     const mobileImagePaths = [
@@ -46,7 +47,7 @@ window.addEventListener("load", function () {
 
             img.src = isMobile
                 ? `images/mobile/${path}`
-                : `images/${path}?${cacheBuster}`;
+                : `images/desktop/${path}?${cacheBuster}`;
 
             img.alt = path.replace(/-/g, " ").replace(".jpg", "") + " Background";
             imageContainer.appendChild(img);
