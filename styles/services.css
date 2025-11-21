@@ -13,23 +13,23 @@
     z-index: 2;   
 }
 
-.plugin-title.fabpackager.lang-en { top: -2vw;  }
+.plugin-title.fabpackager.lang-en { top: -2.5vw;  }
 h3.fabpackager.lang-en { top: 5vw;  }
 
 .plugin-title.fabpackager.lang-he { top: -3vw;  }
 h3.fabpackager.lang-he { top: 4vw;  }
 
-.plugin-title.bimchecker.lang-en { top: -1vw; }
-h3.bimchecker.lang-en { top: 7vw;  }
+.plugin-title.bimchecker.lang-en { top: -1.5vw; }
+h3.bimchecker.lang-en { top: 6.5vw;  }
 
 .plugin-title.bimchecker.lang-he { top: 1vw;  }
 h3.bimchecker.lang-he { top: 5vw;  }
 
 .plugin-title.drawingcreator.lang-en { top: -3vw;  }
-h3.drawingcreator.lang-en { top: 4vw;  }
+h3.drawingcreator.lang-en { top: 4.5vw;  }
 
-.plugin-title.drawingcreator.lang-he { top: -1vw;  }
-h3.drawingcreator.lang-he { top: 4vw;  }
+.plugin-title.drawingcreator.lang-he { top: -1.5vw;  }
+h3.drawingcreator.lang-he { top: 3vw;  }
 
 
 .plugin-title {

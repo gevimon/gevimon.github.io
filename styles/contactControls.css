@@ -1,5 +1,3 @@
-
-
 .product-checkmarks .row {
     display: grid;
     grid-template-columns: 5vw 70vw; /* Checkbox = 10vw, Text = 60vw */
@@ -42,4 +40,122 @@
 button:disabled {
     opacity: .5;
     pointer-events: none;
+}
+
+
+.contact-modal-dialog #contact-form.in-modal input[type="text"],
+.contact-modal-dialog #contact-form.in-modal input[type="email"],
+.contact-modal-dialog #contact-form.in-modal input[type="tel"],
+.contact-modal-dialog #contact-form.in-modal textarea{
+    width: 60vw;
+    font-size: 4vw;
+    padding: 0.4em;
+    box-sizing: border-box;
+     text-align: center; 
+    font-family: 'Alef', Arial, sans-serif; /* Use Alef font */
+}
+
+.contact-modal-dialog #contact-form.in-modal textarea {
+    min-height: 8vw;
+    resize: vertical;
+    padding: 0.2em;
+}
+
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form input[type="tel"],
+#contact-form textarea {
+    width: 30vw;
+    font-size: 2vw;
+    padding: 0.7em;
+    box-sizing: border-box;
+     text-align: center; 
+    font-family: 'Alef', Arial, sans-serif; /* Use Alef font */
+}
+
+#contact-form textarea {
+    min-height: 8vw;
+    resize: vertical;
+    padding: 0.2em;
+}
+
+.contact-modal-dialog {
+    border: 5px solid black;    /* Black border */
+    padding: 1.5vw;               /* Control padding */
+    background: #fff;           /* Ensure background is visible */
+    position: fixed;
+    top: 25%;
+    left: 48%;
+    transform: translate(-50%, -50%); /* Center on screen */
+    z-index: 1000;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    border-radius: 5vw;
+    max-width: 90vw;
+    width: 20vw;                /* Desktop width */
+     height: auto;
+    max-height: none;
+}
+
+@media (max-width: 768px) {
+    .contact-modal-dialog {
+        width: 80vw;   /* Wider on mobile */
+        padding: 4vw;
+    }
+}
+
+/* NEW: overlay styling + customization */
+.contact-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    background: var(--contact-overlay-bg, rgba(0,0,0,0.5)); /* default if no data attr */
+    z-index: 999;
+    transition: background .25s ease;
+}
+
+.contact-modal-overlay.is-open {
+    display: block;
+}
+
+.contact-modal-overlay.no-bg {
+    background: transparent !important;
+    pointer-events: none; /* makes only dialog interactive */
+}
+
+/* REPLACED minimal close button */
+.contact-modal-close {
+    position: absolute;
+    top: 0.4rem;      /* adjust as needed */
+    right: 0.8rem;    /* adjust as needed */
+    font-size: 2.2rem; /* X size */
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Optional: remove focus outline (comment out if you want accessibility outline) */
+.contact-modal-close:focus {
+    outline: none;
+}
+
+.contact-modal-header {
+    text-align: center;
+    margin: 0 0 4vw;
+    padding: 0;
+}
+.contact-modal-header h2 {
+    font-size: 6vw;
+    margin: 0;
+    font-family: 'Alef', Arial, sans-serif;
+    line-height: 1.1;
+}
+@media (min-width: 769px) {
+    .contact-modal-header h2 {
+        font-size: 2vw;
+    }
 }
