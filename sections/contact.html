@@ -26,8 +26,8 @@
             </button>
 
             <form id="contact-form">
-                <label class="lang lang-en required" for="name-company">Name / Company:</label>
-                <label class="lang lang-he required" for="name-company" dir="rtl" style="display:none;">שם / חברה:</label>
+                <label class="lang lang-en required" for="name-company">Company Name:</label>
+                <label class="lang lang-he required" for="name-company" dir="rtl" style="display:none;">שם חברה:</label>
                 <label class="lang lang-ar required" for="name-company" dir="rtl" style="display:none;">الاسم / الشركة:</label>
                 <input type="text" id="name-company" required>
 
@@ -62,10 +62,15 @@
     </div>
 
     <!-- Mobile modal -->
-    <div id="contact-modal-overlay" class="contact-modal-overlay" aria-hidden="true">
-        <div class="contact-modal-dialog" role="dialog" aria-modal="true">
+    <div id="contact-modal-overlay" class="contact-modal-overlay" aria-hidden="true" data-overlay-bg="transparent">
+        <div class="contact-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
             <button type="button" id="contact-modal-close" class="contact-modal-close" aria-label="Close">×</button>
-            <div class="contact-modal-content"><!-- Form injected here on open --></div>
+            <div class="contact-modal-header" id="contact-modal-title">
+                <h2 class="lang lang-en">Contact Us</h2>
+                <h2 class="lang lang-he" dir="rtl" style="display:none;">יצירת קשר</h2>
+                <h2 class="lang lang-ar" dir="rtl" style="display:none;">اتصل بنا</h2>
+            </div>
+            <div id="contact-modal-content" class="contact-modal-content"><!-- Form injected here on open --></div>
         </div>
     </div>
 </section>
