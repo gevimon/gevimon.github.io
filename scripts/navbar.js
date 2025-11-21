@@ -10,8 +10,8 @@ class SiteNavbar extends HTMLElement {
         <img src="${root}images/bimbee-logo.png" alt="BIMbee Logo">
       </div>
       <ul class="nav-links" id="nav-list">
-        <li><a href="${root}index.html#landing-page" class="nav-link lang lang-en">Home</a></li>
-        <li><a href="${root}index.html#landing-page" class="nav-link lang lang-he" dir="rtl" style="display:none;">דף הבית</a></li>
+        <li><a href="${root}index.html" class="nav-link lang lang-en">Home</a></li>
+        <li><a href="${root}index.html" class="nav-link lang lang-he" dir="rtl" style="display:none;">דף הבית</a></li>
 
         <li><a href="${root}index.html#about-us" class="nav-link lang lang-en">About Us</a></li>
         <li><a href="${root}index.html#about-us" class="nav-link lang lang-he" dir="rtl" style="display:none;">אודותינו</a></li>

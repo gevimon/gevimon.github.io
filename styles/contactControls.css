@@ -85,8 +85,8 @@ button:disabled {
     padding: 1.5vw;               /* Control padding */
     background: #fff;           /* Ensure background is visible */
     position: fixed;
-    top: 25%;
-    left: 48%;
+    top: 19%;
+    left: 38vw;
     transform: translate(-50%, -50%); /* Center on screen */
     z-index: 1000;
     box-shadow: 0 2px 16px rgba(0,0,0,0.2);
@@ -97,11 +97,13 @@ button:disabled {
     max-height: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     .contact-modal-dialog {
         width: 80vw;   /* Wider on mobile */
         padding: 4vw;
     }
+
+    
 }
 
 /* NEW: overlay styling + customization */
@@ -149,13 +151,25 @@ button:disabled {
     padding: 0;
 }
 .contact-modal-header h2 {
-    font-size: 6vw;
+    font-size: 8vw;
     margin: 0;
     font-family: 'Alef', Arial, sans-serif;
     line-height: 1.1;
 }
-@media (min-width: 769px) {
+
+ /* Make form labels/titles larger and bolder */
+    .contact-modal-dialog #contact-form.in-modal label {
+        font-size: 5vw;
+        margin-bottom: 2vw;
+        font-weight: bold;
+        display: block;
+    }
+
+@media (min-width: 1025px) {
     .contact-modal-header h2 {
         font-size: 2vw;
     }
+
+   
+
 }

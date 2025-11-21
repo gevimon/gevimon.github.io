@@ -69,14 +69,14 @@ body {
     }
 
 /* Center language-switcher on mobile when hamburger is visible */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     .language-switcher {
         position: absolute;
         top: 50%; /* Center vertically */
         left: 50%; /* Center horizontally */
         transform: translate(-50%, -50%); /* Offset to truly center */
         justify-content: center; /* Center the links horizontally */
-        z-index: 1000; /* Ensure it’s above other elements if needed */
+        z-index: 1000; /* Ensure itï¿½s above other elements if needed */
     }
 }
 
@@ -88,7 +88,7 @@ body {
     flex-direction: column;
     cursor: pointer;
     position: relative; /* Make sure it can layer above the nav-links */
-    z-index: 1000; /* Ensure it’s above the nav-links when open */
+    z-index: 1000; /* Ensure itï¿½s above the nav-links when open */
 }
 
     .hamburger span {
@@ -99,7 +99,7 @@ body {
     }
 
 /* Mobile-specific styles */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     .hamburger {
         display: flex; /* Show the hamburger on mobile */
     }
@@ -287,7 +287,7 @@ footer {
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     /* Adjust navigation */
     .nav-links {
         position: fixed;

@@ -50,7 +50,7 @@ h3.drawingcreator.lang-he { top: 3vw;  }
 
 
 /* Mobile-only size tweak for the overlay text; keeps position unchanged */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     .plugin-block:first-of-type {
         margin-top: 15vw; /* More space above first block on mobile, adjust as needed */
     }

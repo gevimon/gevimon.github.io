@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         function openModal() {
-            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+            const isMobile = window.matchMedia('(max-width: 1025px)').matches;
             if (!isMobile) return;
             modalContent.appendChild(contactForm);
             contactForm.classList.add('in-modal'); // add class for modal-specific CSS
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function closeModal() {
-            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+            const isMobile = window.matchMedia('(max-width: 1025px)').matches;
             if (!isMobile) return;
             const hero = document.querySelector('#contact .hero');
             if (hero) hero.appendChild(contactForm);
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         window.addEventListener('resize', () => {
-            const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+            const isMobile = window.matchMedia('(max-width: 1025px)').matches;
             if (!isMobile && modalOverlay.classList.contains('is-open')) {
                 closeModal();
             }
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const contactNavLinks = document.querySelectorAll('a[href="#contact"]');
         contactNavLinks.forEach(link => {
             link.addEventListener('click', e => {
-                const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+                const isMobile = window.matchMedia('(max-width: 1025px)').matches;
                 if (!isMobile) return; // allow normal scroll on desktop
                 e.preventDefault();
                 openModal();

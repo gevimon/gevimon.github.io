@@ -97,15 +97,18 @@
 /* Adjust the transparency by changing the last value in rgba, e.g., rgba(255, 255, 255, 1) for no transparency */
 
 /* Bigger button text on smaller mobile screens for readability */
-@media (max-width: 768px) {
+@media (max-width: 1025px) {
     :root {
-        --bee-button-font-size: 1.6rem;
+        --bee-button-font-size: 5.5vw;
         --bee-button-font-size-he: calc(var(--bee-button-font-size) * 1.0);
     }
     #landing-page button[type="button"],
     #contact #mobile-contact-trigger,
     #contact #submit-button,
     #future-roadmap .hero button {
-        padding: 0.4em 0.8em; /* keep tap target comfortable */
+        padding: 2vw 4vw; /* keep tap target comfortable */
     }
+
+
+        
 }

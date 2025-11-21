@@ -87,7 +87,9 @@ function reorderNav(direction) {
     const navList = document.getElementById('nav-list');
     if (!navList || !originalNavOrder.length) return;
     navList.innerHTML = '';
-    if (direction === 'rtl') {
+    // Only reverse for desktop (width > 1025px)
+    const isDesktop = window.matchMedia('(min-width: 1025px)').matches;
+    if (direction === 'rtl' && isDesktop) {
         originalNavOrder.slice().reverse().forEach(item => navList.appendChild(item));
     } else {
         originalNavOrder.forEach(item => navList.appendChild(item));
@@ -97,11 +99,23 @@ function reorderNav(direction) {
 // Close the menu when clicking outside of it on mobile
 document.addEventListener('click', (e) => {
     const navListEl = document.getElementById('nav-list');
-    if (!navListEl) return;
     const hamburger = document.querySelector('.hamburger');
-    if (navListEl.classList.contains('active') &&
-        !navListEl.contains(e.target) &&
-        hamburger && !hamburger.contains(e.target)) {
+    // Only close menu if hamburger is visible (mobile) and click is outside nav/hamburger
+    const isMobile = window.matchMedia('(max-width: 1025px)').matches;
+    if (isMobile && navListEl && hamburger &&
+        !navListEl.contains(e.target) && !hamburger.contains(e.target)) {
+        closeMenu();
+    }
+});
+
+// Close the menu immediately after selecting a nav link on mobile
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('#nav-list a.nav-link');
+    if (!link) return;
+    const navListEl = document.getElementById('nav-list');
+    const isMobile = window.matchMedia('(max-width: 1025px)').matches;
+    if (isMobile && navListEl && navListEl.classList.contains('active')) {
+        // Close before or after scroll/navigation; immediate is fine
         closeMenu();
     }
 });

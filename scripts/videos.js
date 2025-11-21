@@ -59,6 +59,10 @@ function openPluginModal(plugin) {
         videoSrc = 'videos/drawing-creator.mp4';
         videoTitle = lang === 'he' ? 'תוסף DrawingCreator' : 'Drawing Creator Plugin';
         descriptionId = lang === 'he' ? 'drawingcreator-desc-he' : 'drawingcreator-desc-en';
+    } else if (plugin === 'promo') {
+        videoSrc = 'videos/promo.mp4';
+        videoTitle = lang === 'he' ? 'הסבר על BIMbee וכל התוספים' : 'BIMbee Overview & Plugins Promo';
+        descriptionId = lang === 'he' ? 'promo-desc-he' : 'promo-desc-en';
     } else {
         return;
     }
