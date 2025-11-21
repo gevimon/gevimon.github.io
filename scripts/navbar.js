@@ -25,8 +25,8 @@ class SiteNavbar extends HTMLElement {
         <li><a href="${root}index.html#contact" class="nav-link lang lang-en">Contact</a></li>
         <li><a href="${root}index.html#contact" class="nav-link lang lang-he" dir="rtl" style="display:none;">צור קשר</a></li>
 
-  <li><a href="${root}BIMBlog/blog.html" class="nav-link lang lang-en">BIMblog</a></li>
-  <li><a href="${root}BIMBlog/blog.html" class="nav-link lang lang-he" dir="rtl" style="display:none;">בימ-בלוג</a></li>
+        <li><a href="${root}BIMBlog/blog.html" class="nav-link lang lang-en">BIMblog</a></li>
+        <li><a href="${root}BIMBlog/blog.html" class="nav-link lang lang-he" dir="rtl" style="display:none;">בימ-בלוג</a></li>
       </ul>
 
       <div class="language-switcher">
@@ -39,6 +39,9 @@ class SiteNavbar extends HTMLElement {
         <span></span>
       </div>
     </nav>`;
+
+    // Notify scripts that navbar is ready
+    try { window.dispatchEvent(new CustomEvent('site-navbar:ready')); } catch {}
   }
 }
 

@@ -11,10 +11,22 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
 
+        // NEW: apply data-overlay-bg if present
+        const overlayBg = modalOverlay.getAttribute('data-overlay-bg');
+        if (overlayBg) modalOverlay.style.background = overlayBg;
+
+        // OPTIONAL: expose a simple API to toggle background at runtime
+        window.contactModalOverlay = {
+            setBackground(bg) { modalOverlay.style.background = bg; },
+            disableBackground() { modalOverlay.classList.add('no-bg'); },
+            enableBackground() { modalOverlay.classList.remove('no-bg'); }
+        };
+
         function openModal() {
             const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
             if (!isMobile) return;
             modalContent.appendChild(contactForm);
+            contactForm.classList.add('in-modal'); // add class for modal-specific CSS
             modalOverlay.classList.add('is-open');
             modalOverlay.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
@@ -27,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isMobile) return;
             const hero = document.querySelector('#contact .hero');
             if (hero) hero.appendChild(contactForm);
+            contactForm.classList.remove('in-modal'); // remove class when returning to page
             modalOverlay.classList.remove('is-open');
             modalOverlay.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';

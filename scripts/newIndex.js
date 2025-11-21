@@ -56,32 +56,39 @@ window.addEventListener("load", function () {
 
 
     function loadSections() {
-    let loadedCount = 0;
-    sections.forEach((section) => {
-        fetch(`sections/${section}.html`)
-            .then((response) => {
-                if (!response.ok) throw new Error(`Failed to load ${section}.html`);
-                return response.text();
-            })
-            .then((data) => {
-                const wrapper = document.createElement("div");
-                wrapper.innerHTML = data.trim();
+        let loadedCount = 0;
+        sections.forEach((section) => {
+            fetch(`sections/${section}.html`)
+                .then((response) => {
+                    if (!response.ok) throw new Error(`Failed to load ${section}.html`);
+                    return response.text();
+                })
+                .then((data) => {
+                    const wrapper = document.createElement("div");
+                    wrapper.innerHTML = data.trim();
 
-                const firstChild = wrapper.firstElementChild;
-                if (firstChild) {
-                    contentContainer.appendChild(firstChild);
-                }
-                loadedCount++;
-                // When all sections are loaded, set the language
-                if (loadedCount === sections.length) {
-                    if (typeof setLanguage === "function") {
-                        setLanguage(window.defaultLang || 'en');
+                    const firstChild = wrapper.firstElementChild;
+                    if (firstChild) {
+                        contentContainer.appendChild(firstChild);
                     }
-                }
-            })
-            .catch((error) => console.error(error));
-    });
-}
+                    loadedCount++;
+                    // When all sections are loaded, set the language
+                    if (loadedCount === sections.length) {
+                        if (typeof setLanguage === "function") {
+                            const saved =
+                                (typeof getStoredLanguage === 'function' && getStoredLanguage()) ||
+                                window.currentLang ||
+                                window.startLang ||
+                                (function(){ try { return localStorage.getItem('preferredLanguage') || localStorage.getItem('bimbee_lang'); } catch { return null; } })() ||
+                                window.defaultLang ||
+                                'en';
+                            setLanguage(saved);
+                        }
+                    }
+                })
+                .catch((error) => console.error(error));
+        });
+    }
 
     updateImages();
     loadSections();

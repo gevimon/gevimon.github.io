@@ -1,28 +1,53 @@
 // Store the original order of navigation items
 let originalNavOrder = [];
-const navList = document.getElementById('nav-list');
+let navInitialized = false;
 
-// Language Switching
-document.getElementById('lang-en').addEventListener('click', function (event) {
-    event.preventDefault();
-    setLanguage('en');
-    try { localStorage.setItem('bimbee_lang', 'en'); } catch {}
+// Delegated language switcher (works for static and custom navbar)
+document.addEventListener('click', function (event) {
+    if (event.target && (event.target.id === 'lang-en' || event.target.id === 'lang-he')) {
+        event.preventDefault();
+        const lang = event.target.id === 'lang-en' ? 'en' : 'he';
+        setLanguage(lang);
+        try { localStorage.setItem('preferredLanguage', lang); } catch {}
+        document.cookie = 'preferredLanguage=' + encodeURIComponent(lang) + ';path=/;max-age=31536000';
+    }
 });
 
-document.getElementById('lang-he').addEventListener('click', function (event) {
-    event.preventDefault();
-    setLanguage('he');
-    try { localStorage.setItem('bimbee_lang', 'he'); } catch {}
-});
+// Helper to get stored language (localStorage + cookie + legacy key)
+function getStoredLanguage() {
+    let saved = null;
+    try {
+        saved = localStorage.getItem('preferredLanguage') ||
+                localStorage.getItem('bimbee_lang') || null;
+    } catch {}
+    if (!saved) {
+        const m = document.cookie.match(/(?:^|;\s*)preferredLanguage=([^;]+)/);
+        if (m) saved = decodeURIComponent(m[1]);
+    }
+    return saved;
+}
 
-
-window.addEventListener('DOMContentLoaded', function () {
-    var navList = document.getElementById('nav-list');
+// Initialize when nav-list is available
+function initLanguageUI() {
+    const navList = document.getElementById('nav-list');
+    if (!navList || navInitialized) return;
     originalNavOrder = Array.from(navList.children);
-    var saved = null;
-    try { saved = localStorage.getItem('bimbee_lang'); } catch {}
+    navInitialized = true;
+    const saved = getStoredLanguage() || window.startLang;
     setLanguage(saved || window.defaultLang || 'he');
+}
+
+window.addEventListener('DOMContentLoaded', initLanguageUI);
+window.addEventListener('site-navbar:ready', initLanguageUI);
+
+// Fallback in case neither event catches (e.g. race conditions)
+const navWaitObserver = new MutationObserver(() => {
+    if (document.getElementById('nav-list')) {
+        initLanguageUI();
+        navWaitObserver.disconnect();
+    }
 });
+navWaitObserver.observe(document.documentElement, { childList: true, subtree: true });
 
 function setLanguage(lang) {
     var elements = document.querySelectorAll('.lang');
@@ -49,42 +74,38 @@ function setLanguage(lang) {
     } catch (e) { /* no-op */ }
 }
 
-function reorderNav(direction) {
-    var navList = document.getElementById('nav-list');
-
-    // Clear the existing list and reorder based on the selected language
-    navList.innerHTML = '';
-
-    if (direction === 'rtl') {
-        // Reverse the original order for RTL (Hebrew)
-        originalNavOrder.slice().reverse().forEach(function (item) {
-            navList.appendChild(item);
-        });
-    } else {
-        // Restore the original order for LTR (English)
-        originalNavOrder.forEach(function (item) {
-            navList.appendChild(item);
-        });
-    }
-}
-
-// Hamburger Menu Toggle
 function toggleMenu() {
-    navList.classList.toggle('active');
+    const list = document.getElementById('nav-list');
+    if (list) list.classList.toggle('active');
 }
 function closeMenu() {
-    navList.classList.remove('active');
+    const list = document.getElementById('nav-list');
+    if (list) list.classList.remove('active');
+}
+
+function reorderNav(direction) {
+    const navList = document.getElementById('nav-list');
+    if (!navList || !originalNavOrder.length) return;
+    navList.innerHTML = '';
+    if (direction === 'rtl') {
+        originalNavOrder.slice().reverse().forEach(item => navList.appendChild(item));
+    } else {
+        originalNavOrder.forEach(item => navList.appendChild(item));
+    }
 }
 
 // Close the menu when clicking outside of it on mobile
 document.addEventListener('click', (e) => {
+    const navListEl = document.getElementById('nav-list');
+    if (!navListEl) return;
     const hamburger = document.querySelector('.hamburger');
-    if (navList.classList.contains('active')) {
-        if (!navList.contains(e.target) && !hamburger.contains(e.target)) {
-            closeMenu();
-        }
+    if (navListEl.classList.contains('active') &&
+        !navListEl.contains(e.target) &&
+        hamburger && !hamburger.contains(e.target)) {
+        closeMenu();
     }
 });
+
 // Existing code remains unchanged...
 // Add lazy-loading for initial images and for dynamically added images
 document.addEventListener('DOMContentLoaded', function () {
