@@ -88,12 +88,12 @@ button:disabled {
     top: 19%;
     left: 38vw;
     transform: translate(-50%, -50%); /* Center on screen */
-    z-index: 1000;
+    z-index: 10000;
     box-shadow: 0 2px 16px rgba(0,0,0,0.2);
     border-radius: 5vw;
     max-width: 90vw;
     width: 20vw;                /* Desktop width */
-     height: auto;
+    height: auto;
     max-height: none;
 }
 
@@ -112,7 +112,7 @@ button:disabled {
     inset: 0;
     display: none;
     background: var(--contact-overlay-bg, rgba(0,0,0,0.5)); /* default if no data attr */
-    z-index: 999;
+    z-index: 9999;
     transition: background .25s ease;
 }
 
