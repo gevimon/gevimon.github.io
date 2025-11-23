@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modalOverlay.classList.add('is-open');
             modalOverlay.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             const firstInput = contactForm.querySelector('input');
             if (firstInput) setTimeout(() => firstInput.focus(), 100);
         }
