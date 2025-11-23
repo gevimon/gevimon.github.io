@@ -30,7 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
             modalOverlay.classList.add('is-open');
             modalOverlay.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll to the modal dialog itself
+            const modalDialog = document.querySelector('.contact-modal-dialog');
+            if (modalDialog) {
+                modalDialog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             const firstInput = contactForm.querySelector('input');
             if (firstInput) setTimeout(() => firstInput.focus(), 100);
         }
