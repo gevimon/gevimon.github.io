@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const firstInput = contactForm.querySelector('input');
             if (firstInput) setTimeout(() => firstInput.focus(), 100);
+                attachListener(); // Re-attach listeners after moving form
         }
 
         function closeModal() {
