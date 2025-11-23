@@ -23,8 +23,22 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap" rel="stylesheet">
 
-     <script>
-      window.defaultLang = 'en'; // or 'he'
+    <script>
+      (function () {
+        let saved = null;
+        try {
+          saved = localStorage.getItem('preferredLanguage') || localStorage.getItem('bimbee_lang');
+        } catch {}
+        if (!saved) {
+          const m = document.cookie.match(/(?:^|;\s*)preferredLanguage=([^;]+)/);
+          if (m) saved = decodeURIComponent(m[1]);
+        }
+        if (saved) {
+          document.documentElement.setAttribute('lang', saved);
+          window.startLang = saved;
+        }
+        window.defaultLang = 'en';
+      })();
     </script>
 </head>
 <body>
@@ -35,8 +49,8 @@
             <img src="images/bimbee-logo.png" alt="BIMbee Logo">
         </div>
         <ul class="nav-links" id="nav-list">
-            <li><a href="#landing-page" class="nav-link lang lang-en">Home</a></li>
-            <li><a href="#landing-page" class="nav-link lang lang-he" dir="rtl" style="display:none;">
+            <li><a href="index.html" class="nav-link lang lang-en">Home</a></li>
+            <li><a href="index.html" class="nav-link lang lang-he" dir="rtl" style="display:none;">
 
 
                 דף הבית</a></li>

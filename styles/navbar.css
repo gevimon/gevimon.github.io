@@ -58,7 +58,7 @@
 /* Hamburger Menu */
 .hamburger {
     position: fixed;      /* Always in the same spot on the viewport */
-    top: 3vw;            /* Adjust as needed */
+    top: 2.1vw;            /* Adjust as needed */
     right: 3vw;          /* Adjust as needed */
     z-index: 2000;        /* Above everything else */
     display: none;        /* Hidden by default, shown on mobile */
@@ -67,11 +67,35 @@
     padding: 0;
 }
     .hamburger span {
-        height: 0.5vw;
+        height: 0.6vw;
         background: #333;
-        margin: 0.4vw 0;
-        width: 3vw;
+        margin: 0.7vw 0;
+        width: 5vw;
     }
+
+/* Desktop Navbar Improvements */
+@media (min-width: 1025px) {
+     #navbar {
+        padding: 0.8vw 2vw; /* Tighter top/bottom, more left/right */
+    }
+    .nav-links li {
+        margin: 0 1vw; /* Less space between links */
+    }
+    .nav-links a {
+        font-size: 1.2vw; /* More reasonable font size */
+    }
+    #navbar .logo img {
+        max-width: 3.5vw; /* Slightly smaller logo */
+    }
+    .language-switcher {
+        font-size: 1.5vw; /* Smaller language switcher */
+        justify-content: flex-start;
+    }
+    .language-switcher a {
+        font-size: 1.5vw;
+        margin: 0 1vw;
+    }
+}
 
 /* Responsive Navbar Styles */
 @media (max-width: 1025px) {
