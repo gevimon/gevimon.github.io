@@ -10,22 +10,25 @@ How to use this template:
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Post Title Here</title>
-  <link href="../styles/global.css" rel="stylesheet" />
-  <link href="../styles/navbar.css" rel="stylesheet" />
+  <link href="../../styles/global.css" rel="stylesheet" />
+  <link href="../../styles/navbar.css" rel="stylesheet" />
   <link href="../styles/blog.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Alef&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <script>
-    window.defaultLang = 'en';
-  </script>
+  <script>window.defaultLang = 'en';</script>
 </head>
 <body>
   <!-- When you copy this file into BIMBlog/posts/, the data-root below is correct (../../) -->
   <!-- If you preview this template directly from BIMBlog/, change to data-root="../" just for preview. -->
   <site-navbar data-root="../../"></site-navbar>
 
-  <article class="post-page">
+  <article class="post-page">    
+      <br />
     <header class="post-header">
+      <div class="post-backbar">
+        <a class="post-back lang lang-en" href="../blog.html">← Back to BIMblog</a>
+        <a class="post-back lang lang-he" href="../blog.html" dir="rtl" style="display:none;">← חזרה לבימבלוג</a>
+      </div>
       <h1>Post Title Here</h1>
       <p class="post-sub">Month DD, YYYY • X min read</p>
     </header>

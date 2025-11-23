@@ -3,8 +3,7 @@
   const searchInput = document.getElementById('search');
   const tagFilter = document.getElementById('tag-filter');
   const sortOrder = document.getElementById('sort-order');
-  const dateFrom = document.getElementById('date-from');
-  const dateTo = document.getElementById('date-to');
+  // Date filters removed
   const yearSpan = document.getElementById('year');
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
@@ -65,24 +64,55 @@
       const card = document.createElement('article');
       card.className = 'post-card';
       const thumbnailSrc = p.thumbnail || '../images/play-placeholder.jpg';
-      const title = (lang === 'he' ? (p.title_he || p.title) : (p.title_en || p.title || ''));
-      const excerpt = (lang === 'he' ? (p.excerpt_he || p.excerpt) : (p.excerpt_en || p.excerpt || ''));
+      const rawTitle = (lang === 'he' ? (p.title_he || p.title) : (p.title_en || p.title || ''));
+      const rawExcerpt = (lang === 'he' ? (p.excerpt_he || p.excerpt) : (p.excerpt_en || p.excerpt || ''));
       const readTime = (lang === 'he' ? (p.readTime_he || p.readTime) : (p.readTime_en || p.readTime || ''));
-      const thumb = `<a class="post-link" href="${p.url}" aria-label="${title}"><img class="thumb" src="${thumbnailSrc}" alt="${p.title}" loading="lazy" /></a>`;
+      const plainTitle = (rawTitle || '').replace(/<[^>]*>/g,'').trim();
+      const plainExcerpt = (rawExcerpt || '').replace(/<[^>]*>/g,'').trim();
+      const thumb = `<a class="post-link" href="${p.url}"><img class="thumb" src="${thumbnailSrc}" alt="${plainTitle}" loading="lazy" /></a>`;
       card.innerHTML = `
         ${thumb}
         <div class="post-body">
-          <h2 class="post-title"><a href="${p.url}">${title}</a></h2>
+          <h2 class="post-title"></h2>
           <div class="post-meta">${formatDate(p.date)} • ${readTime}</div>
-          <p class="post-excerpt">${excerpt}</p>
+          <p class="post-excerpt"></p>
           <div class="post-tags">${renderTags(lang === 'he' ? (p.tags_he || p.tags) : (p.tags || p.tags_he))}</div>
         </div>
       `;
+
+      // Inject the title safely after structure creation
+      const titleEl = card.querySelector('h2.post-title');
+      const linkEl = document.createElement('a');
+      linkEl.href = p.url;
+      if (lang === 'he') {
+        linkEl.innerHTML = rawTitle; // allow embedded spans
+        titleEl.dir = 'rtl';
+        titleEl.style.unicodeBidi = 'bidi-override';
+      } else {
+        linkEl.textContent = plainTitle;
+      }
+      titleEl.appendChild(linkEl);
+
+      // Inject excerpt safely (Hebrew may contain spans)
+      const excerptEl = card.querySelector('p.post-excerpt');
+      if (excerptEl) {
+        if (lang === 'he') {
+          excerptEl.innerHTML = rawExcerpt;
+          excerptEl.dir = 'rtl';
+          excerptEl.style.unicodeBidi = 'bidi-override';
+        } else {
+          excerptEl.textContent = plainExcerpt;
+        }
+      }
+
+      // Accessibility labels (use plain text only)
+      const thumbLink = card.querySelector('a.post-link');
+      if (thumbLink) thumbLink.setAttribute('aria-label', plainTitle);
       // Make the entire card clickable for easier navigation
       const cover = document.createElement('a');
       cover.href = p.url;
       cover.className = 'stretched-link';
-      cover.setAttribute('aria-label', title);
+      cover.setAttribute('aria-label', plainTitle);
       card.appendChild(cover);
       frag.appendChild(card);
     });
@@ -92,36 +122,24 @@
   function applyFilters(){
     const q = (searchInput.value || '').toLowerCase();
     const tag = tagFilter.value;
-    const from = dateFrom && dateFrom.value ? new Date(dateFrom.value) : null;
-    const to = dateTo && dateTo.value ? new Date(dateTo.value) : null;
+    // Date filters removed
     const lang = getLang();
     let filtered = allPosts;
     if (q){
-      filtered = filtered.filter(p =>
-        ((lang === 'he' ? (p.title_he || p.title) : (p.title_en || p.title)) || '').toLowerCase().includes(q) ||
-        ((lang === 'he' ? (p.excerpt_he || p.excerpt) : (p.excerpt_en || p.excerpt)) || '').toLowerCase().includes(q) ||
-        ((lang === 'he' ? (p.tags_he || p.tags) : (p.tags || p.tags_he)) || []).some(t => (t||'').toLowerCase().includes(q))
-      );
+      filtered = filtered.filter(p => {
+        const titleStr = (lang === 'he' ? (p.title_he || p.title) : (p.title_en || p.title) || '').replace(/<[^>]*>/g,'');
+        const excerptStr = (lang === 'he' ? (p.excerpt_he || p.excerpt) : (p.excerpt_en || p.excerpt) || '').replace(/<[^>]*>/g,'');
+        const tagsArr = (lang === 'he' ? (p.tags_he || p.tags) : (p.tags || p.tags_he)) || [];
+        return titleStr.toLowerCase().includes(q) ||
+               excerptStr.toLowerCase().includes(q) ||
+               tagsArr.some(t => (t||'').toLowerCase().includes(q));
+      });
     }
     if (tag){
       const tagList = (p) => (lang === 'he' ? (p.tags_he || p.tags) : (p.tags || p.tags_he)) || [];
       filtered = filtered.filter(p => tagList(p).includes(tag));
     }
-    if (from){
-      filtered = filtered.filter(p => {
-        const d = new Date(p.date);
-        return !isNaN(d) && d >= from;
-      });
-    }
-    if (to){
-      // include end date day by setting time to end of day
-      const end = new Date(to);
-      end.setHours(23,59,59,999);
-      filtered = filtered.filter(p => {
-        const d = new Date(p.date);
-        return !isNaN(d) && d <= end;
-      });
-    }
+    // Date filtering removed
 
     // Sort order
     const order = sortOrder ? sortOrder.value : 'newest';
@@ -148,8 +166,7 @@
     searchInput.addEventListener('input', applyFilters);
     tagFilter.addEventListener('change', applyFilters);
     if (sortOrder) sortOrder.addEventListener('change', applyFilters);
-    if (dateFrom) dateFrom.addEventListener('change', applyFilters);
-    if (dateTo) dateTo.addEventListener('change', applyFilters);
+    // Date filter event listeners removed
   }
 
   function updateUITexts(){

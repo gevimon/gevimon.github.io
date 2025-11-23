@@ -1,38 +1,73 @@
+const RLM = '\u200F';
+const ltrSpan = (text) =>
+  `<span dir="ltr" style="unicode-bidi:isolate;">${text}</span>`;
+
+
 // JS fallback for blog posts data. Useful when viewing over file:// where fetch may be blocked.
 window.BIM_POSTS = {
   posts: [
-    {
-      title: "BIM Is Not Just 3D — Why BIM Management Matters",
-      title_en: "BIM Is Not Just 3D — Why BIM Management Matters",
-      title_he: "BIM הוא לא רק תלת־ממד — למה ניהול BIM חשוב",
+    {            
       date: "2025-09-25",
-      excerpt: "BIM isn’t only 3D geometry — it’s managed information. Why BIM management matters and how automation roots it deeper.",
+      
+      title_en: "BIM Is Not Just 3D — Why BIM Management Matters",
       excerpt_en: "BIM isn’t only 3D geometry — it’s managed information. Why BIM management matters and how automation roots it deeper.",
-      excerpt_he: "BIM הוא לא רק גיאומטריה; זה מידע מנוהל. למה ניהול BIM חשוב ואיך אוטומציה מעמיקה אותו.",
+      
+      title_he:      
+        ltrSpan("BIM") +
+        " הוא לא רק תלת־ממד — למה ניהול " +
+        ltrSpan("BIM") +
+        " חשוב"
+      ,      
+      excerpt_he:
+        ltrSpan("BIM") +
+        " זהו מאגר מידע מקיף שמלווה את הפרויקט בכל שלביו. נדגיש את החשיבות של " +
+        ltrSpan("BIM") +
+        " מהו ניהול נכון של המידע, ומתן גישה מדויקת לכל בעלי העניין."
+      ,
+
       tags: ["BIM", "Management", "Automation", "Tekla"],
       tags_he: ["BIM", "ניהול", "אוטומציה", "Tekla"],
+
       thumbnail: "pics/BIM-Management1.jpg",
       url: "posts/2025-09-25-bim-not-just-3d.html",
-      readTime: "6 min read",
+      
       readTime_en: "6 min read",
       readTime_he: "קריאה של 6 דק׳"
     },
+
     {
-      title: "Fabrication Folder — Turning Modeling into Reality",
-      title_en: "Fabrication Folder — Turning Modeling into Reality",
-      title_he: "תיק הייצור — להפוך מודל למציאות",
       date: "2025-09-24",
-      excerpt: "What goes into a complete fabrication folder and how to issue it right: phases, reports, drawings, DSTV/DXF, IFC, checks, and smart locking.",
+
+      title_en: "Fabrication Folder — Turning Modeling into Reality",
       excerpt_en: "What goes into a complete fabrication folder and how to issue it right: phases, reports, drawings, DSTV/DXF, IFC, checks, and smart locking.",
-      excerpt_he: "מה נכנס לתיקיית פבריקציה מלאה ואיך מנפיקים אותה נכון: פייזים, דוחות, שרטוטים, DSTV/DXF, IFC, בדיקות ונעילות חכמות.",
+
+      title_he:
+        "תיק הייצור — להפוך מודל למציאות",
+
+      excerpt_he:
+        "מה נכנס לתיקיית " +
+        ltrSpan("Fabrication") +
+        " מלאה ואיך מנפיקים אותה נכון: פייזים, דוחות, שרטוטים, " +
+        ltrSpan("DSTV/DXF") +
+        ", " +
+        ltrSpan("IFC") +
+        ", בדיקות ונעילות חכמות.",
+
       tags: ["Fabrication", "Tekla", "Workflow", "Quality"],
-      tags_he: ["פבריקציה", "Tekla", "תהליך", "איכות"],
+      tags_he: [
+        ltrSpan("Fabrication"),
+        ltrSpan("Tekla"),
+        "תהליך",
+        "איכות"
+      ],
+
       thumbnail: "pics/Fab-Folder1.jpg",
       url: "posts/2025-09-24-fabrication-folder.html",
-      readTime: "6 min read",
+
       readTime_en: "6 min read",
       readTime_he: "קריאה של 6 דק׳"
     },
+    
     {
       title: "Custom Components in Tekla — Build Once, Reuse Everywhere",
       title_en: "Custom Components in Tekla — Build Once, Reuse Everywhere",
@@ -61,9 +96,9 @@ window.BIM_POSTS = {
       tags_he: ["Tekla", "BIM", "איכות", "פרודוקטיביות"],
       thumbnail: "pics/Similar-Parts1.jpg",
       url: "posts/2025-09-22-similar-parts-numbering-accuracy.html",
-  readTime: "6 min read",
-  readTime_en: "6 min read",
-  readTime_he: "קריאה של 6 דק׳"
+      readTime: "6 min read",
+      readTime_en: "6 min read",
+      readTime_he: "קריאה של 6 דק׳"
     },
     {
       title: "Stop Rebuilding Settings — Tekla Firm Folder Basics",
