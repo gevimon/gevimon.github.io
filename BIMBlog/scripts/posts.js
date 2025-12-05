@@ -7,6 +7,49 @@ const ltrSpan = (text) =>
 window.BIM_POSTS = {
   posts: [
     {            
+      date: "2025-09-26",
+      
+      title_en: "Great Assembly Drawings: Shift From Manual Drafting to Confident Reviewing",
+      excerpt_en: "How to move from manual assembly drafting to confident reviewing using clear rules and API-driven automation in Tekla.",
+      
+      title_he:      
+        "שרטוטי הרכבה מעולים: המעבר משרטוט ידני לבקרת איכות"      
+      ,      
+      excerpt_he:
+        "איך עוברים ממצב שבו דיטיילרים שורפים זמן על מידול ידני של שרטוטי הרכבה, למצב שבו האוטומציה מייצרת שרטוטים עקביים והדיטיילר מתמקד בבקרה ובאיכות."
+      ,
+
+      tags: ["Tekla", "Automation", "Drawings", "Quality"],
+      tags_he: ["Tekla", "אוטומציה", "שרטוטים", "איכות"],
+
+      thumbnail: "pics/Assembly-Drawings1.jpg",
+      url: "posts/2025-09-26-great-assembly-drawings.html",
+      
+      readTime_en: "7 min read",
+      readTime_he: "קריאה של 7 דק׳"
+    },
+    {
+      date: "2025-09-27",
+
+      title_en: "Why Model Checking Must Happen Before Fabrication",
+      excerpt_en:
+        "Why disciplined model checks before drawings and fabrication protect schedules, budgets, and relationships — and how automation like BIMChecker supports detailers.",
+
+      title_he: "למה בדיקת המודל חייבת לקרות לפני הייצור",
+      excerpt_he:
+        "למה בדיקות מודל מסודרות לפני שרטוטים וייצור מגנות על לוחות זמנים, תקציב והיחסים עם המפעל — ואיך אוטומציה כמו BIMChecker תומכת בדיטיילר.",
+
+      tags: ["BIM", "Tekla", "Quality", "Automation"],
+      tags_he: ["BIM", "Tekla", "איכות", "אוטומציה"],
+
+      thumbnail: "pics/Model-Checks1.jpg",
+      url: "posts/2025-09-27-model-checks-before-fabrication.html",
+
+      readTime_en: "7 min read",
+      readTime_he: "קריאה של 7 דק׳"
+    },
+
+    {            
       date: "2025-09-25",
       
       title_en: "BIM Is Not Just 3D — Why BIM Management Matters",
