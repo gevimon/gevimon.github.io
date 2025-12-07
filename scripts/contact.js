@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
         function openModal() {
             const isMobile = window.matchMedia('(max-width: 1025px)').matches;
             if (!isMobile) return;
+            // Ensure overlay is top-most in case of unexpected stacking contexts
+            modalOverlay.style.zIndex = '999999';
             modalContent.appendChild(contactForm);
             contactForm.classList.add('in-modal'); // add class for modal-specific CSS
             modalOverlay.classList.add('is-open');
