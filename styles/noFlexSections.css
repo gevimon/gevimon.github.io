@@ -58,6 +58,7 @@ section {
     padding: 80px 20px;
     max-width: 2000px;
     margin: 0 auto;
+    z-index: 0;
 }
 
     section h2 {
